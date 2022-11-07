@@ -18,7 +18,7 @@ public:
 		position.y = y_in;
 		romzmiar_okna.x = rx_in - 100;
 		romzmiar_okna.y = ry_in - 100;
-		tekstura.loadFromFile("pokeball.PNG");
+		tekstura.loadFromFile("shrokjj.png");
 		pSprite.setTexture(tekstura);
 		pSprite.setPosition(position);
 	}
