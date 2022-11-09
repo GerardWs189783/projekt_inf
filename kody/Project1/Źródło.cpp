@@ -53,11 +53,41 @@ void Pokeball::animuj()
 	sprawdzKolizjeSciany();
 	przesun(xVel, yVel);
 }
+
+/*class gracz
+{
+private:
+	sf::Vector2f pos;
+	float xVel = 1, yVel = 1;
+	sf::Texture tekstura;
+	sf::Sprite gSprite;
+	sf::Vector2f rozmiar_okna;
+public:
+	gracz(float x_in, float y_in) 
+	{
+		pos.x = x_in;
+		pos.y = y_in;
+		tekstura.loadFromFile("decha.jpg");
+		gSprite.setTexture(tekstura);
+		gSprite.setPosition(pos);
+	}
+	sf::Sprite getgracz() { return gSprite; }
+	void przesun(float x_in, float y_in);
+};
+void gracz::przesun(float x_in, float y_in)
+{
+	sf::Vector2f pos;
+	pos.x = x_in;
+	pos.y = y_in;
+	gSprite.move(pos);
+	pos = gSprite.getPosition();
+}*/
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML animation");
 	sf::Event event;
 	Pokeball pb(100, 100, 800, 600);
+	/*gracz p1(250, 500);*/
 	sf::Clock zegar;
 	/*sf::Texture tekstura;
 	tekstura.loadFromFile("pokeball.png");
@@ -72,11 +102,31 @@ int main()
 		}
 		window.clear(sf::Color::Green);
 		window.draw(pb.getPokeball());
+		/*window.draw(p1.getgracz());*/
 		window.display();
 		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
 			pb.animuj();
 			zegar.restart();
 		}
+		/*if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::S)
+			{
+				p1.przesun(0, -10);
+			}
+			if (event.key.code == sf::Keyboard::W)
+			{
+				p1.przesun(0, 10);
+			}
+			if (event.key.code == sf::Keyboard::A)
+			{
+				p1.przesun(-10, 0);
+			}
+			if (event.key.code == sf::Keyboard::D)
+			{
+				p1.przesun(10, 0);
+			}
+		}*/
+		return 0;
 	}
-	return 0;
 }
