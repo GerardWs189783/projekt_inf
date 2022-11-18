@@ -143,6 +143,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Źródło.cpp" />
+    <ClCompile Include="Źródło1.cpp" />
+    <ClCompile Include="Źródło2.cpp" />
+    <ClCompile Include="Źródło3.cpp" />
+    <ClCompile Include="Źródło4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
