@@ -90,16 +90,16 @@ void Block::move()
 {
 	float x = 0, y = 0;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distX(0,700);
+	std::uniform_int_distribution<> distX(-300,300);
 	std::uniform_int_distribution<> distY(0,200);
 	x = distX(gen);
 	y = distY(gen);
 	//Warunek, ¿e je¿eli wspólrzêdne poza ekranem to jeszcze raz losuje 
 	if(!((x< block.getGlobalBounds().width / 2.f) || (x > 800 - block.getGlobalBounds().width / 2.f) || (y<block.getGlobalBounds().height/2.f) ||(y>250)))
-	block.move(x, pos.y);
+	block.move(x, 0);
 	else
 	{
-		block.setPosition(distX(gen),pos.y);
+		block.setPosition(distX(gen),200);
 	}
 }
 
