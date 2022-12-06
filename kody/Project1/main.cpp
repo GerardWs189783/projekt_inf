@@ -14,17 +14,22 @@ private:
 	sf::Texture tekstura;
 	sf::Sprite pSprite;
 	sf::Vector2f romzmiar_okna;
+	sf::FloatRect ballbound;
 public:
 	Ball(float x_in, float y_in, float rx_in, float ry_in)
 	{
 		position.x = x_in;
 		position.y = y_in;
-		romzmiar_okna.x = rx_in - 70;
-		romzmiar_okna.y = ry_in - 70;
+		//romzmiar_okna.x = rx_in - 70;
+		//romzmiar_okna.y = ry_in - 70;
 		tekstura.loadFromFile("zdj/shrokjj.png");
 		pSprite.setTexture(tekstura);
 		pSprite.setPosition(position);
 		pSprite.setScale(sf::Vector2f(70.f / pSprite.getLocalBounds().width, 70.f / pSprite.getLocalBounds().height));
+		/*pSprite.setOrigin(pSprite.getGlobalBounds().width/2.f, pSprite.getGlobalBounds().height/2.f);*/
+		romzmiar_okna.x = rx_in - pSprite.getGlobalBounds().width /*-70*/;
+		romzmiar_okna.y = ry_in - pSprite.getGlobalBounds().height /*- 70*/;
+		ballbound = pSprite.getGlobalBounds();
 	}
 	void przesun(float x_in, float y_in)
 	{
@@ -55,32 +60,107 @@ public:
 	}
 	void sprawdzKolizjeObiektu(sf::Sprite sprite)
 	{
+		sf::FloatRect overlap = sprite.getGlobalBounds();
 		if (pSprite.getGlobalBounds().intersects(sprite.getGlobalBounds())) {
+			/*if (pSprite.getPosition().x - sprite.getPosition().x > 0)
+			{
+				pSprite.setPosition(pSprite.getPosition().x + sprite.getGlobalBounds().width, pSprite.getPosition().y);
+			}
+			else if (pSprite.getPosition().x - sprite.getPosition().x < 0)
+			{
+				pSprite.setPosition(pSprite.getPosition().x + (-1)*sprite.getGlobalBounds().width, pSprite.getPosition().y);
+			}*/
+			/*if (pSprite.getPosition().x - sprite.getPosition().x < 0)
+			{
+				pSprite.move(pSprite.getPosition().x - sprite.getPosition().x, 0);
+			}
+			else if (pSprite.getPosition().x - sprite.getPosition().x > 0)
+			{
+				pSprite.move(pSprite.getPosition().x - sprite.getPosition().x, 0);
+			}*/
+			//right
+			//if (ballbound.left < overlap.left && ballbound.left + ballbound.width < overlap.left + overlap.width
+			//	&& ballbound.top < overlap.top + overlap.height
+			//	&& ballbound.top + ballbound.height < overlap.top)
+			//{
+			//	pSprite.setPosition(overlap.left - ballbound.width, ballbound.top);
+			//	yVel *= -1;
+			//}
+			////left
+			//else if (ballbound.left > overlap.left && ballbound.left + ballbound.width > overlap.left + overlap.width
+			//	&& ballbound.top < overlap.top + overlap.height
+			//	&& ballbound.top + ballbound.height < overlap.top)
+			//{
+			//	pSprite.setPosition(overlap.left + ballbound.width, ballbound.top);
+			//	yVel *= -1;
+			//}
+			////bottom
+			//if (ballbound.top < overlap.top && ballbound.top + ballbound.height < overlap.top + overlap.height
+			//	&& ballbound.left < overlap.left + overlap.width
+			//	&& ballbound.left + ballbound.width < overlap.left)
+			//{
+			//	pSprite.setPosition(ballbound.left, overlap.top - ballbound.height);
+			//	yVel *= -1;
+			//}
+			////top
+			//else if (ballbound.top > overlap.top && ballbound.top + ballbound.height > overlap.top + overlap.height
+			//	&& ballbound.left < overlap.left + overlap.width
+			//	&& ballbound.left + ballbound.width < overlap.left)
+			//{
+			//	pSprite.setPosition(ballbound.left, overlap.top - overlap.height);
+			//	yVel *= -1;
+			//}
+			if (sprite.getPosition().x + sprite.getGlobalBounds().width - pSprite.getPosition().x - pSprite.getGlobalBounds().width < 0)
+			{
+				xVel *= -1;
+				pSprite.move(sf::Vector2f((-1) * (sprite.getPosition().x + sprite.getGlobalBounds().width - pSprite.getPosition().x - pSprite.getGlobalBounds().width), 0.f));
+			}
+			//else if (/*sprite.getPosition().x + sprite.getGlobalBounds().width +*/ pSprite.getPosition().x + pSprite.getGlobalBounds().width > sprite.getPosition().x + (sprite.getGlobalBounds().width)/2)
+			//{
+			//	xVel *= -1;
+			//	pSprite.move(sf::Vector2f(/*(-1) **/ ( pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x - sprite.getGlobalBounds().width), 0.f));
+			//}
+			/*else if (pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x - sprite.getGlobalBounds().width < 0)
+			{
+				xVel *= -1;
+				pSprite.move(sf::Vector2f((-1)*(sprite.getPosition().x + (sprite.getGlobalBounds().width)/2 - pSprite.getPosition().x - pSprite.getGlobalBounds().width), 0.f));
+			}*/
+			/*if (pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x + sprite.getGlobalBounds().width < 0)
+			{
+				pSprite.move(sf::Vector2f((-1) * (pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x + sprite.getGlobalBounds().width), 0.f));
+			}*/
 			yVel *= -1;
 		}
+		/*if(position.x<sprite.getPosition().x + sprite.getGlobalBounds().width && position.x+pSprite.getGlobalBounds().width > sprite.getPosition().x
+			&& position.y<sprite.getPosition().y + sprite.getGlobalBounds().height && position.y + pSprite.getGlobalBounds().height > sprite.getPosition().y)
+			yVel *= -1;*/
 	}
 };
 
 class Block {
 private:
 	sf::Vector2f pos;
-	sf::RectangleShape block;
+	sf::Texture tekstura;
+	sf::Sprite block;
+
 public:
 	Block(float x_in,float y_in);
 	void bdraw(sf::RenderWindow& window);
 	void move();
+	sf::Sprite getSprite();
 };
 
 Block::Block(float x_in, float y_in)
 {
 	pos.x = x_in;
 	pos.y = y_in;
+	tekstura.loadFromFile("zdj/blockani.png");
+	block.setTexture(tekstura);
+	block.setTextureRect(sf::IntRect(3, 3, 48, 18));
 	block.setPosition(pos.x, pos.y);
-	block.setFillColor(sf::Color(0,0,0));
-	block.setSize(sf::Vector2f(100.f, 100.f));
-	block.setScale(sf::Vector2f(80.f / block.getLocalBounds().width, 40.f / block.getLocalBounds().height));
+	block.setScale(sf::Vector2f(75.f / block.getGlobalBounds().width, 30.f / block.getGlobalBounds().height));
+	block.setOrigin(sf::Vector2f(block.getLocalBounds().width / 2.f, block.getLocalBounds().height / 2.f));
 }
-
 void Block::bdraw(sf::RenderWindow& window)
 {
 	window.draw(block);
@@ -90,17 +170,20 @@ void Block::move()
 {
 	float x = 0, y = 0;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distX(-300,300);
+	std::uniform_int_distribution<> distX(0,700);
 	std::uniform_int_distribution<> distY(0,200);
 	x = distX(gen);
 	y = distY(gen);
-	//Warunek, ¿e je¿eli wspólrzêdne poza ekranem to jeszcze raz losuje 
-	if(!((x< block.getGlobalBounds().width / 2.f) || (x > 800 - block.getGlobalBounds().width / 2.f) || (y<block.getGlobalBounds().height/2.f) ||(y>250)))
-	block.move(x, 0);
-	else
-	{
+	/*if(!((x< block.getGlobalBounds().width / 2.f) || (x > 800 - block.getGlobalBounds().width / 2.f) || (y<block.getGlobalBounds().height/2.f) ||(y>250)))*/
+	block.setPosition(x, y);
+	/*else*/
+	/*{
 		block.setPosition(distX(gen),200);
-	}
+	}*/
+}
+//Zrobiæ naliczanie punktów, sprite który zmienia skina przy uderzeniu?
+sf::Sprite Block::getSprite() {
+	return block;
 }
 
 int main()
@@ -147,6 +230,7 @@ int main()
 		{
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
 				pb.animuj(p1.getSprite());
+				pb.sprawdzKolizjeObiektu(b1.getSprite());
 				zegar.restart();
 			}
 			if (z.getElapsedTime().asMilliseconds() > 1000.f)
