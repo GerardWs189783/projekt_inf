@@ -62,22 +62,7 @@ public:
 	{
 		sf::FloatRect overlap = sprite.getGlobalBounds();
 		if (pSprite.getGlobalBounds().intersects(sprite.getGlobalBounds())) {
-			/*if (pSprite.getPosition().x - sprite.getPosition().x > 0)
-			{
-				pSprite.setPosition(pSprite.getPosition().x + sprite.getGlobalBounds().width, pSprite.getPosition().y);
-			}
-			else if (pSprite.getPosition().x - sprite.getPosition().x < 0)
-			{
-				pSprite.setPosition(pSprite.getPosition().x + (-1)*sprite.getGlobalBounds().width, pSprite.getPosition().y);
-			}*/
-			/*if (pSprite.getPosition().x - sprite.getPosition().x < 0)
-			{
-				pSprite.move(pSprite.getPosition().x - sprite.getPosition().x, 0);
-			}
-			else if (pSprite.getPosition().x - sprite.getPosition().x > 0)
-			{
-				pSprite.move(pSprite.getPosition().x - sprite.getPosition().x, 0);
-			}*/
+			
 			//right
 			//if (ballbound.left < overlap.left && ballbound.left + ballbound.width < overlap.left + overlap.width
 			//	&& ballbound.top < overlap.top + overlap.height
@@ -110,25 +95,33 @@ public:
 			//	pSprite.setPosition(ballbound.left, overlap.top - overlap.height);
 			//	yVel *= -1;
 			//}
-			if (sprite.getPosition().x + sprite.getGlobalBounds().width - pSprite.getPosition().x - pSprite.getGlobalBounds().width < 0)
+			//Lewa czêœæ pi³ki
+			/*if (sprite.getPosition().x + sprite.getGlobalBounds().width - pSprite.getPosition().x - pSprite.getGlobalBounds().width < 0)
 			{
 				xVel *= -1;
 				pSprite.move(sf::Vector2f((-1) * (sprite.getPosition().x + sprite.getGlobalBounds().width - pSprite.getPosition().x - pSprite.getGlobalBounds().width), 0.f));
-			}
-			//else if (/*sprite.getPosition().x + sprite.getGlobalBounds().width +*/ pSprite.getPosition().x + pSprite.getGlobalBounds().width > sprite.getPosition().x + (sprite.getGlobalBounds().width)/2)
-			//{
-			//	xVel *= -1;
-			//	pSprite.move(sf::Vector2f(/*(-1) **/ ( pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x - sprite.getGlobalBounds().width), 0.f));
-			//}
-			/*else if (pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x - sprite.getGlobalBounds().width < 0)
+			}*/
+			//Najlepiej dzia³a na lew¹ stronê resztynie dotyka ale jest to chyba robocze
+			if (pSprite.getPosition().x < sprite.getPosition().x + (0.5)*sprite.getGlobalBounds().width &&
+				pSprite.getPosition().x+pSprite.getGlobalBounds().width > sprite.getPosition().x - (0.5) * sprite.getGlobalBounds().width &&
+				abs(sprite.getPosition().x + (0.5) * sprite.getGlobalBounds().width - pSprite.getPosition().x) < abs(sprite.getPosition().y + (0.5) * sprite.getGlobalBounds().height - pSprite.getPosition().y) /*&&
+				pSprite.getPosition().y+pSprite.getGlobalBounds().height > sprite.getPosition().y - (0.5)*sprite.getGlobalBounds().height*/
+				&& sprite.getPosition().x + (0.5) * sprite.getGlobalBounds().width - pSprite.getPosition().x <(pSprite.getGlobalBounds().width)/2
+				&& pSprite.getPosition().x + pSprite.getGlobalBounds().width > sprite.getPosition().x - (0.5) * sprite.getGlobalBounds().width)
 			{
 				xVel *= -1;
-				pSprite.move(sf::Vector2f((-1)*(sprite.getPosition().x + (sprite.getGlobalBounds().width)/2 - pSprite.getPosition().x - pSprite.getGlobalBounds().width), 0.f));
-			}*/
-			/*if (pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x + sprite.getGlobalBounds().width < 0)
+				pSprite.move(sf::Vector2f(sprite.getPosition().x+ (0.5) * sprite.getGlobalBounds().width - pSprite.getPosition().x, 0.f));
+			}
+			//prawa strona pi³ki
+			else if (pSprite.getPosition().x + pSprite.getGlobalBounds().width > sprite.getPosition().x - (sprite.getGlobalBounds().width)/2.f &&
+				pSprite.getPosition().x < sprite.getPosition().x - (0.5)*sprite.getGlobalBounds().width &&
+				pSprite.getPosition().x < sprite.getPosition().x + (0.5) * sprite.getGlobalBounds().width)
 			{
-				pSprite.move(sf::Vector2f((-1) * (pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x + sprite.getGlobalBounds().width), 0.f));
-			}*/
+				xVel *= -1;
+				pSprite.move(sf::Vector2f(pSprite.getPosition().x + pSprite.getGlobalBounds().width - sprite.getPosition().x +(sprite.getGlobalBounds().width) / 4.f , 0.f));
+			}
+			//Góra i dó³
+			/*else if ()*/
 			yVel *= -1;
 		}
 		/*if(position.x<sprite.getPosition().x + sprite.getGlobalBounds().width && position.x+pSprite.getGlobalBounds().width > sprite.getPosition().x
