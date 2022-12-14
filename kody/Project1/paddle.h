@@ -12,6 +12,7 @@ public:
 	void move(sf::Vector2f mov);
 
 	sf::Sprite getSprite();
+	sf::Sprite* getSpritep();
 
 	void pdraw(sf::RenderWindow& window);
 };

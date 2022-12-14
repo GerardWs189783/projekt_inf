@@ -144,6 +144,9 @@
   <ItemGroup>
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="block.cpp" />
+    <ClCompile Include="block2.cpp" />
+    <ClCompile Include="blockTab.cpp" />
+    <ClCompile Include="fps.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="test.cpp" />
@@ -156,6 +159,9 @@
   <ItemGroup>
     <ClInclude Include="ball.h" />
     <ClInclude Include="block.h" />
+    <ClInclude Include="block2.h" />
+    <ClInclude Include="blockTab.h" />
+    <ClInclude Include="fps.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="paddle.h" />
   </ItemGroup>
