@@ -3,16 +3,23 @@
 
 std::random_device rd;
 
-Block::Block(float x_in, float y_in)
+Block::Block(/*float x_in, float y_in*/)
 {
-	pos.x = x_in;
-	pos.y = y_in;
+	//pos.x = x_in;
+	//pos.y = y_in;
+	this->posinit();
 	tekstura.loadFromFile("zdj/blockani.png");
 	block.setTexture(tekstura);
-	block.setTextureRect(sf::IntRect(3, 3, 48, 18));
+	block.setTextureRect(sf::IntRect(112, 3, 47, 17));//3,3,48,18
 	block.setPosition(pos.x, pos.y);
 	block.setScale(sf::Vector2f(75.f / block.getGlobalBounds().width, 30.f / block.getGlobalBounds().height));
 	block.setOrigin(sf::Vector2f(block.getLocalBounds().width / 2.f, block.getLocalBounds().height / 2.f));
+}
+
+void Block::posinit()
+{
+	this->pos.x = 200;
+	this->pos.y = 200;
 }
 
 void Block::bdraw(sf::RenderWindow& window)
@@ -39,6 +46,9 @@ void Block::move()
 sf::Sprite Block::getSprite() {
 	return block;
 }
+sf::Sprite* Block::getSpritep() {
+	return &block;
+}
 
 //int::Block::score(sf::Sprite sprite, int wynik)
 //{
@@ -46,4 +56,19 @@ sf::Sprite Block::getSprite() {
 //}
 sf::FloatRect Block::getBounds() {
 	return block.getGlobalBounds();
+}
+
+void Block::animacja()
+{
+	sf::IntRect txtrect = block.getTextureRect();
+	txtrect.top += 20;
+	block.setTextureRect(txtrect);
+}
+
+void Block::setpos(sf::Vector2f posin) {
+	pos = posin;
+}
+
+sf::Vector2f Block::getpos() {
+	return pos;
 }

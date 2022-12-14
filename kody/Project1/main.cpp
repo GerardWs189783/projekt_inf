@@ -5,7 +5,9 @@
 #include "paddle.h"
 #include "ball.h"
 #include "block.h"
-
+#include <sstream>
+#include "fps.h"
+#include "block2.h"
 
 
 int main()
@@ -23,8 +25,13 @@ int main()
 	sf::Clock zegar,z;
 	bool wait = true;
 	Paddle p1(400, 540);
-	Ball pb(100, 100, 800, 600);
-	Block b1(200, 200);
+	Ball pb(300, 100, 800, 600);
+	Block* b1 = new Block();
+	Block2* b2 = new Block2();
+	BlockTab* bt = new BlockTab(window);
+	/*Block b1(200,200);*/
+	FPS fps;
+	window.setFramerateLimit(60);
 
 	while (window.isOpen())
 	{
@@ -41,19 +48,21 @@ int main()
 				wait = !wait;
 
 		}
-
-		/*pb.scoreinit();*/
+		fps.FPSrate();
 		window.clear(sf::Color::Green);
 		p1.pdraw(window);
 		/*window.draw(pb.getBall());*/
 		pb.drawt(window);
-		b1.bdraw(window);
+		//b1->bdraw(window);
+		//b2->bdraw(window);
+		bt->draw(window);
+		fps.drawFPS(window);
 		window.display();
 		if (wait == true)
 		{
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-				pb.animuj(p1.getSprite(),b1.getSprite());
-				pb.sprawdzKolizjeObiektu(b1.getSprite());
+				pb.animuj(&p1,bt);
+				//pb.sprawdzKolizjeObiektu(b2->getSprite());
 				zegar.restart();
 			}
 			/*if (z.getElapsedTime().asMilliseconds() > 1000.f)

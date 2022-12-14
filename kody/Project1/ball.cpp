@@ -1,6 +1,8 @@
 #include "ball.h"
 #include "block.h"
 #include <iostream>
+#include "paddle.h"
+
 
 Ball::Ball(float x_in, float y_in, float rx_in, float ry_in)
 {
@@ -18,6 +20,7 @@ Ball::Ball(float x_in, float y_in, float rx_in, float ry_in)
 	ballbound = pSprite.getGlobalBounds();
 	score = 0;	
 	this->scoreinit();
+	this->velInit();
 }
 
 void Ball::przesun(float x_in, float y_in)
@@ -44,15 +47,30 @@ void Ball::sprawdzKolizjeSciany()
 		yVel = -abs(yVel);
 }
 
-void Ball::animuj(sf::Sprite sprite, sf::Sprite sprite1)
+void Ball::animuj(Paddle* pad, BlockTab* block)
 {
+	sf::Sprite sprite = pad->getSprite();
+
 	sprawdzKolizjeSciany();
 	sprawdzKolizjeObiektu(sprite);
 	przesun(xVel, yVel);
-	scoreincr(sprite1);
+
+	int n = block->getsize();
+	for (int i = 0; i < n; i++) {
+		sf::Sprite sprite1 = block->getarrpointer()[i]->getSprite();
+
+		scoreincr(sprite1);
+
+		if (sprawdzKolizjeObiektu(sprite1) == 1) {
+
+			block->getarrpointer()[i]->animacja();
+		}
+	}
+
+
 }
 
-void Ball::sprawdzKolizjeObiektu(sf::Sprite sprite)
+int Ball::sprawdzKolizjeObiektu(sf::Sprite &sprite)
 {
 	sf::FloatRect overlap = sprite.getGlobalBounds();
 	if (pSprite.getGlobalBounds().intersects(sprite.getGlobalBounds())) {
@@ -95,7 +113,9 @@ void Ball::sprawdzKolizjeObiektu(sf::Sprite sprite)
 			pSprite.move(sf::Vector2f(0.f, + sprite.getPosition().y + (0.5) * sprite.getGlobalBounds().height - pSprite.getPosition().y));
 		}
 		/*yVel *= -1;*/
+		return 1;
 	}
+	return 0;
 
 }
 
@@ -117,7 +137,7 @@ void Ball::scoreinit()
 	this->scoretext.setPosition(sf::Vector2f(10.f, 5.f));
 	this->scoretext.setCharacterSize(28);
 	this->scoretext.setFillColor(sf::Color::Black);
-	this->scoretext.setString("Score: " + std::to_string(this->score));
+	setScore();
 }
 
 //int Ball::scorecount(Block *block)
@@ -140,5 +160,17 @@ void Ball::scoreincr(sf::Sprite sprite)
 	if (pSprite.getGlobalBounds().intersects(sprite.getGlobalBounds()))
 	{
 		this->score ++;
+		setScore();
 	}
+}
+
+void Ball::setScore()
+{
+	this->scoretext.setString("Score: " + std::to_string(this->score));
+}
+
+void Ball::velInit()
+{
+	this->yVel = 6;
+	this->xVel = 6;
 }

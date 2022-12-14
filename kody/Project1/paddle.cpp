@@ -22,6 +22,9 @@ void Paddle::move(sf::Vector2f mov) {
 sf::Sprite Paddle::getSprite() {
 	return skin;
 }
+sf::Sprite* Paddle::getSpritep() {
+	return &skin;
+}
 
 void Paddle::pdraw(sf::RenderWindow& window) {
 	window.draw(skin);
