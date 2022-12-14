@@ -10,3 +10,5 @@ Arkanoid
 8.12 kolizja
 
 10.12 poprawa kolizji, licznik punktów
+
+14.12 nowe bloki, tablica bloków, licznik fps
