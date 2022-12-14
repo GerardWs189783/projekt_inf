@@ -57,13 +57,13 @@ void Ball::animuj(Paddle* pad, BlockTab* block)
 
 	int n = block->getsize();
 	for (int i = 0; i < n; i++) {
-		sf::Sprite sprite1 = block->getarrpointer()[i]->getSprite();
+		sf::Sprite sprite1 = block->getelementpointerb(i)->getSprite();
 
 		scoreincr(sprite1);
 
 		if (sprawdzKolizjeObiektu(sprite1) == 1) {
 
-			block->getarrpointer()[i]->animacja();
+			block->getelementpointerb(i)->animacja();
 		}
 	}
 

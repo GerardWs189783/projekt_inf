@@ -10,6 +10,9 @@ Block2::Block2()
 	block.setTextureRect(sf::IntRect(54, 3, 48, 18));
 }
 
+Block2::Block2(Block& block) : Block(block) {
+}
+
 void Block2::posinit()
 {
 	this->pos.x = 400;

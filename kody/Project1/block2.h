@@ -4,12 +4,12 @@
 class Block2 : public Block
 {
 private:
-	int hp;
 	//sf::Vector2f pos;
 	//sf::Sprite block2;
- 	void posinit();
 public:
+	void posinit();
 	Block2();
+	Block2(Block& block);
 	void animation();
 	void hpdec();
 };

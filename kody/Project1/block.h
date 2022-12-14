@@ -10,6 +10,7 @@ protected:
 	void posinit();
 public:
 	Block(/*float x_in, float y_in*/);
+	//Block(Block& block);
 	void bdraw(sf::RenderWindow& window);
 	void move();
 	sf::Sprite getSprite();

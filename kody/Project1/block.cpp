@@ -15,6 +15,10 @@ Block::Block(/*float x_in, float y_in*/)
 	block.setScale(sf::Vector2f(75.f / block.getGlobalBounds().width, 30.f / block.getGlobalBounds().height));
 	block.setOrigin(sf::Vector2f(block.getLocalBounds().width / 2.f, block.getLocalBounds().height / 2.f));
 }
+//
+//Block::Block(Block& block) {
+//	*this = block;
+//}
 
 void Block::posinit()
 {
