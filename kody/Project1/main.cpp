@@ -25,9 +25,9 @@ int main()
 	sf::Clock zegar,z;
 	bool wait = true;
 	Paddle p1(400, 540);
-	Ball pb(300, 100, 800, 600);
-	Block* b1 = new Block();
-	Block2* b2 = new Block2();
+	Ball* pb = new Ball(300, 100, 800, 600);
+	//Block* b1 = new Block();
+	//Block2* b2 = new Block2();
 	BlockTab* bt = new BlockTab(window);
 	/*Block b1(200,200);*/
 	FPS fps;
@@ -49,10 +49,10 @@ int main()
 
 		}
 		fps.FPSrate();
-		window.clear(sf::Color::Green);
+		window.clear(sf::Color::Blue);
 		p1.pdraw(window);
 		/*window.draw(pb.getBall());*/
-		pb.drawt(window);
+		pb->drawt(window);
 		//b1->bdraw(window);
 		//b2->bdraw(window);
 		bt->draw(window);
@@ -61,7 +61,7 @@ int main()
 		if (wait == true)
 		{
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-				pb.animuj(&p1,bt);
+				pb->animuj(&p1,bt);
 				//pb.sprawdzKolizjeObiektu(b2->getSprite());
 				zegar.restart();
 			}
@@ -72,5 +72,7 @@ int main()
 			}*/
 		}
 	}
+
+	// nie rysuje, ale potrzebne usuwanie tej pamieci?, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
 	return 0;
 }
