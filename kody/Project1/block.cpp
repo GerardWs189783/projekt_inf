@@ -7,10 +7,11 @@ Block::Block(/*float x_in, float y_in*/)
 {
 	//pos.x = x_in;
 	//pos.y = y_in;
+	hp = 3;
 	this->posinit();
 	tekstura.loadFromFile("zdj/blockani.png");
 	block.setTexture(tekstura);
-	block.setTextureRect(sf::IntRect(112, 3, 47, 17));//3,3,48,18
+	block.setTextureRect(sf::IntRect(112, 3, 48, 18));//3,3,48,18
 	block.setPosition(pos.x, pos.y);
 	block.setScale(sf::Vector2f(75.f / block.getGlobalBounds().width, 30.f / block.getGlobalBounds().height));
 	block.setOrigin(sf::Vector2f(block.getLocalBounds().width / 2.f, block.getLocalBounds().height / 2.f));
@@ -40,7 +41,7 @@ void Block::move()
 	x = distX(gen);
 	y = distY(gen);
 	/*if(!((x< block.getGlobalBounds().width / 2.f) || (x > 800 - block.getGlobalBounds().width / 2.f) || (y<block.getGlobalBounds().height/2.f) ||(y>250)))*/
-	block.setPosition(x, y);
+	this->block.setPosition(x, y);
 	/*else*/
 	/*{
 		block.setPosition(distX(gen),200);
@@ -65,7 +66,7 @@ sf::FloatRect Block::getBounds() {
 void Block::animacja()
 {
 	sf::IntRect txtrect = block.getTextureRect();
-	txtrect.top += 20;
+	txtrect.top += 25;//25
 	block.setTextureRect(txtrect);
 }
 
@@ -76,3 +77,17 @@ void Block::setpos(sf::Vector2f posin) {
 sf::Vector2f Block::getpos() {
 	return pos;
 }
+
+ int Block::hit()
+{
+	 if (hp > 0) {
+		 hp--;
+	 }
+	 return hp;
+	
+}
+
+ int Block::gethp()
+ {
+	 return this->hp;
+ }

@@ -20,6 +20,8 @@ public:
 	void animacja();
 	void setpos(sf::Vector2f posin);
 	sf::Vector2f getpos();
+	int hit();
+	int gethp();
 	// void czy floatrect przesuniêcie wewn¹trz rysunku jako animacja, ten ma 1 hp a kolejne dziedzicz¹ce wiêcej
 };
 

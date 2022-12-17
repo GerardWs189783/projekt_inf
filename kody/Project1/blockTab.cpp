@@ -29,7 +29,9 @@ void BlockTab::init(sf::RenderWindow& window)
 
 void BlockTab::draw(sf::RenderWindow& window) {
 	for (int i = 0; i < n; i++) {
-		((Block*)btab[i])->bdraw(window);
+		if (((Block*)btab[i])->gethp() > 0) {
+			((Block*)btab[i])->bdraw(window);
+		}
 	}
 }
 

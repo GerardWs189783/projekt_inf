@@ -57,14 +57,33 @@ void Ball::animuj(Paddle* pad, BlockTab* block)
 
 	int n = block->getsize();
 	for (int i = 0; i < n; i++) {
-		sf::Sprite sprite1 = block->getelementpointerb(i)->getSprite();
+		auto blockpointer = block->getelementpointerb(i);
+		/*std::cout << "test2\n";*/
+		if (blockpointer->gethp() > 0) {
 
-		scoreincr(sprite1);
+			sf::Sprite sprite1 = blockpointer->getSprite();
 
-		if (sprawdzKolizjeObiektu(sprite1) == 1) {
+			scoreincr(sprite1);
 
-			block->getelementpointerb(i)->animacja();
+			if (sprawdzKolizjeObiektu(sprite1) == 1) {
+				if (blockpointer->hit() > 0) {
+					blockpointer->animacja();
+					//std::cout << blockpointer->hit() << "\n";
+				}
+			}
 		}
+		//else
+		//{
+		//	delete block->getelementpointerb(i);
+		//	block->getelementpointerb(i) = nullptr;
+		//	if (block->getelementpointerb(i) == nullptr) {
+		//		std::cout << "nullptr\n";
+		//	}
+		//	//block->getelementpointerb(i) = NULL;
+		//	//blockpointer.release();
+		//	/*if (blockpointer == NULL)
+		//		std::cout << "Usuniety" << std::endl;*/
+		//}
 	}
 
 
