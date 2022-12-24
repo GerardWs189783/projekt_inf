@@ -25,7 +25,7 @@ int main()
 	sf::Clock zegar,z;
 	bool wait = true;
 	Paddle p1(400, 540);
-	Ball* pb = new Ball(300, 100, 800, 600);
+	Ball* pb = new Ball(300, 300, 800, 600);
 	//Block* b1 = new Block();
 	//Block2* b2 = new Block2();
 	BlockTab* bt = new BlockTab(window);

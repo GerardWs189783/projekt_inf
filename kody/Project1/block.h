@@ -8,8 +8,10 @@ protected:
 	sf::Sprite block;
 	int hp;
 	void posinit();
+	//Block* b;
 public:
 	Block(/*float x_in, float y_in*/);
+	~Block();
 	//Block(Block& block);
 	void bdraw(sf::RenderWindow& window);
 	void move();
@@ -22,6 +24,7 @@ public:
 	sf::Vector2f getpos();
 	int hit();
 	int gethp();
+	void usun();
 	// void czy floatrect przesuniêcie wewn¹trz rysunku jako animacja, ten ma 1 hp a kolejne dziedzicz¹ce wiêcej
 };
 

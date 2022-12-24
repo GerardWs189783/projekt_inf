@@ -5,8 +5,10 @@ std::random_device rd;
 
 Block::Block(/*float x_in, float y_in*/)
 {
+
 	//pos.x = x_in;
 	//pos.y = y_in;
+	//b = new Block;
 	hp = 3;
 	this->posinit();
 	tekstura.loadFromFile("zdj/blockani.png");
@@ -20,6 +22,11 @@ Block::Block(/*float x_in, float y_in*/)
 //Block::Block(Block& block) {
 //	*this = block;
 //}
+
+Block::~Block() {
+	//delete b;
+	//b = nullptr;
+}
 
 void Block::posinit()
 {
@@ -90,4 +97,8 @@ sf::Vector2f Block::getpos() {
  int Block::gethp()
  {
 	 return this->hp;
+ }
+
+ void Block::usun() {
+
  }

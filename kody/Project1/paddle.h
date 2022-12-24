@@ -8,7 +8,6 @@ private:
 	sf::Sprite skin;
 public:
 	Paddle(float x_in, float y_in);
-
 	void move(sf::Vector2f mov);
 
 	sf::Sprite getSprite();

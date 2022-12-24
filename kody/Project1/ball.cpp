@@ -55,23 +55,35 @@ void Ball::animuj(Paddle* pad, BlockTab* block)
 	sprawdzKolizjeObiektu(sprite);
 	przesun(xVel, yVel);
 
-	int n = block->getsize();
+	/*int n = block->getsize();*/
+	int n = block->bTabsize();
 	for (int i = 0; i < n; i++) {
 		auto blockpointer = block->getelementpointerb(i);
 		/*std::cout << "test2\n";*/
-		if (blockpointer->gethp() > 0) {
+		if (blockpointer != nullptr) {
+			if (blockpointer->gethp() > 0) {
 
-			sf::Sprite sprite1 = blockpointer->getSprite();
+				sf::Sprite sprite1 = blockpointer->getSprite();
 
-			scoreincr(sprite1);
+				scoreincr(sprite1);
 
-			if (sprawdzKolizjeObiektu(sprite1) == 1) {
-				if (blockpointer->hit() > 0) {
-					blockpointer->animacja();
-					//std::cout << blockpointer->hit() << "\n";
+				if (sprawdzKolizjeObiektu(sprite1) == 1) {
+					if (blockpointer->hit() > 0) {
+						blockpointer->animacja();
+						//std::cout << blockpointer->hit() << "\n";
+					}
 				}
 			}
+			else {
+				block->usunelement(i);
+			}
 		}
+		//else {
+		//	block->usunelement(i);
+		//}
+		//else {
+		//	block->destab(i);
+		//}
 		//else
 		//{
 		//	delete block->getelementpointerb(i);
@@ -174,7 +186,7 @@ void Ball::drawt(sf::RenderWindow& window)
 	window.draw(this->scoretext);
 }
 
-void Ball::scoreincr(sf::Sprite sprite)
+void Ball::scoreincr(sf::Sprite &sprite)
 {
 	if (pSprite.getGlobalBounds().intersects(sprite.getGlobalBounds()))
 	{

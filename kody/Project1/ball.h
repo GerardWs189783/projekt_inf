@@ -29,7 +29,7 @@ public:
 	/*int scorecount(Block* block);*/
 	//void scoreprint();
 	void drawt(sf::RenderWindow& window);
-	void scoreincr(sf::Sprite sprite);
+	void scoreincr(sf::Sprite &sprite);
 	void setScore();
 	void velInit();
 };
