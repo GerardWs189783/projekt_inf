@@ -12,3 +12,5 @@ Arkanoid
 10.12 poprawa kolizji, licznik punktów
 
 14.12 nowe bloki, tablica bloków, licznik fps
+
+17.12 tablica przeciwników, przeciwnicy moją poziom życia i znikają gdy stracą całe
