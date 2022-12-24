@@ -14,3 +14,5 @@ Arkanoid
 14.12 nowe bloki, tablica bloków, licznik fps
 
 17.12 tablica przeciwników, przeciwnicy moją poziom życia i znikają gdy stracą całe
+
+24.12 usuwanie elementów gdy stracą całe życie
