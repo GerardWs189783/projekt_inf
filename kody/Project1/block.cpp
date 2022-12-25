@@ -102,3 +102,4 @@ sf::Vector2f Block::getpos() {
  void Block::usun() {
 
  }
+ 

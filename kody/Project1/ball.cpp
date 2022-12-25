@@ -56,8 +56,8 @@ void Ball::animuj(Paddle* pad, BlockTab* block)
 	przesun(xVel, yVel);
 
 	/*int n = block->getsize();*/
-	int n = block->bTabsize();
-	for (int i = 0; i < n; i++) {
+	//int n = block->bTabsize();
+	for (int i = 0; i < block->bTabsize(); i++) {
 		auto blockpointer = block->getelementpointerb(i);
 		/*std::cout << "test2\n";*/
 		if (blockpointer != nullptr) {
@@ -76,26 +76,10 @@ void Ball::animuj(Paddle* pad, BlockTab* block)
 			}
 			else {
 				block->usunelement(i);
+
 			}
 		}
-		//else {
-		//	block->usunelement(i);
-		//}
-		//else {
-		//	block->destab(i);
-		//}
-		//else
-		//{
-		//	delete block->getelementpointerb(i);
-		//	block->getelementpointerb(i) = nullptr;
-		//	if (block->getelementpointerb(i) == nullptr) {
-		//		std::cout << "nullptr\n";
-		//	}
-		//	//block->getelementpointerb(i) = NULL;
-		//	//blockpointer.release();
-		//	/*if (blockpointer == NULL)
-		//		std::cout << "Usuniety" << std::endl;*/
-		//}
+		
 	}
 
 

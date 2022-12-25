@@ -8,7 +8,10 @@
 #include <sstream>
 #include "fps.h"
 #include "block2.h"
+#include "lifeheart.h"
+#include "heart.h"
 
+void koniec(BlockTab* block);
 
 int main()
 {
@@ -30,7 +33,9 @@ int main()
 	//Block2* b2 = new Block2();
 	BlockTab* bt = new BlockTab(window);
 	/*Block b1(200,200);*/
-	FPS fps;
+	Lifeheart* life = new Lifeheart(window);
+	FPS* fps = new FPS();
+	Heart* heart = new Heart(window, life);
 	window.setFramerateLimit(60);
 
 	while (window.isOpen())
@@ -48,7 +53,7 @@ int main()
 				wait = !wait;
 
 		}
-		fps.FPSrate();
+		fps->FPSrate();
 		window.clear(sf::Color::Blue);
 		p1.pdraw(window);
 		/*window.draw(pb.getBall());*/
@@ -56,7 +61,9 @@ int main()
 		//b1->bdraw(window);
 		//b2->bdraw(window);
 		bt->draw(window);
-		fps.drawFPS(window);
+		fps->drawFPS(window);
+		life->draw(window);
+		heart->draw(window);
 		window.display();
 		if (wait == true)
 		{
@@ -73,6 +80,14 @@ int main()
 		}
 	}
 
-	// nie rysuje, ale potrzebne usuwanie tej pamieci?, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
+	//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
 	return 0;
+}
+
+void koniec(BlockTab* block) {
+	if (block->bTabsize() == 0) {
+		std::cout << "WYGRALES!\nKONIEC POZIOMU" << std::endl;
+		//dzia³a chociaz w petli wyœwietla to w nieskonczonosc. Powinno wyswietlic duzy napis w okienku i chyba zatrzymac poziom?
+	}
+
 }

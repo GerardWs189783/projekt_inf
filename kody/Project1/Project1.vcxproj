@@ -148,6 +148,8 @@
     <ClCompile Include="blockTab.cpp" />
     <ClCompile Include="fps.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="heart.cpp" />
+    <ClCompile Include="lifeheart.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Źródło.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="blockTab.h" />
     <ClInclude Include="fps.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="heart.h" />
+    <ClInclude Include="lifeheart.h" />
     <ClInclude Include="paddle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
