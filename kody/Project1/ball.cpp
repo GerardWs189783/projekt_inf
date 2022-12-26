@@ -4,7 +4,7 @@
 #include "paddle.h"
 
 
-Ball::Ball(float x_in, float y_in, float rx_in, float ry_in)
+Ball::Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart *lh)
 {
 	this->position.x = x_in;
 	this->position.y = y_in;
@@ -15,12 +15,13 @@ Ball::Ball(float x_in, float y_in, float rx_in, float ry_in)
 	pSprite.setPosition(position);
 	pSprite.setScale(sf::Vector2f(70.f / pSprite.getLocalBounds().width, 70.f / pSprite.getLocalBounds().height));
 	/*pSprite.setOrigin(pSprite.getGlobalBounds().width/2.f, pSprite.getGlobalBounds().height/2.f);*/
-	romzmiar_okna.x = rx_in - pSprite.getGlobalBounds().width /*-70*/;
-	romzmiar_okna.y = ry_in - pSprite.getGlobalBounds().height /*- 70*/;
+	romzmiar_okna.x = window.getSize().x - pSprite.getGlobalBounds().width /*-70*/;
+	romzmiar_okna.y = window.getSize().y - pSprite.getGlobalBounds().height /*- 70*/;
 	ballbound = pSprite.getGlobalBounds();
 	score = 0;	
 	this->scoreinit();
 	this->velInit();
+	this->hpinit(window,lh);
 }
 
 void Ball::przesun(float x_in, float y_in)
@@ -47,14 +48,14 @@ void Ball::sprawdzKolizjeSciany()
 		yVel = -abs(yVel);
 }
 
-void Ball::animuj(Paddle* pad, BlockTab* block)
+void Ball::animuj(Paddle* pad, BlockTab* block, Heart* hrt, sf::RenderWindow& win)
 {
 	sf::Sprite sprite = pad->getSprite();
 
+	utratahp(hrt, win);
 	sprawdzKolizjeSciany();
 	sprawdzKolizjeObiektu(sprite);
 	przesun(xVel, yVel);
-
 	/*int n = block->getsize();*/
 	//int n = block->bTabsize();
 	for (int i = 0; i < block->bTabsize(); i++) {
@@ -188,4 +189,41 @@ void Ball::velInit()
 {
 	this->yVel = 6;
 	this->xVel = 6;
+}
+
+void Ball::utratahp(Heart *hrt, sf::RenderWindow &win) {
+	if (position.y + pSprite.getGlobalBounds().height > win.getSize().y) {
+		hrt->dechp();
+		pSprite.setPosition(sf::Vector2f(400.f,300.f));
+		yVel = 6;
+		std::cout << "HP: " << hrt->gethp() << std::endl;
+	}
+}
+
+void Ball::hpinit(sf::RenderWindow& window, Lifeheart* lh) {
+	int ilosc = 3;
+	for (int i = 0; i < ilosc; i++) {
+		heartTab.push_back(new Heart(window, lh));
+
+		sf::FloatRect bound = ((Heart*)heartTab[i])->getBounds();
+		((Heart*)heartTab[i])->setpos(sf::Vector2f(lh->getpos().x + 100 + bound.width * (i + 1), window.getSize().y - bound.height / 2));
+		((Heart*)heartTab[i])->getsprt()->setPosition(((Heart*)heartTab[i])->getpos());
+	}
+	
+}
+
+void Ball::hpdraw(sf::RenderWindow& window) {
+	for (int i = 0; i < heartTab.size(); i++) {
+		((Heart*)heartTab[i])->draw(window);
+	}
+}
+
+void Ball::hanima(Heart* hrt, sf::RenderWindow& win) {
+	for (int i = 0; i < heartTab.size(); i++) {
+		// sprawdzanie utraty hp i usuwanie
+	}
+}
+
+Heart* Ball::getpheart(int n) {
+	return (Heart*)heartTab[n];
 }

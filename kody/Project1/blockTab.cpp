@@ -9,7 +9,7 @@ BlockTab::BlockTab(sf::RenderWindow& window)
 void BlockTab::init(sf::RenderWindow& window)
 {
 	sf::Vector2u winsize = window.getSize();
-	this->n = 10;
+	this->n = 33;
 	
 	/*btab = new void*[n];*/
 	/*bTab = new void* [n];*/

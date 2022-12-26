@@ -3,6 +3,8 @@
 #include "block.h"
 #include "paddle.h"
 #include "blockTab.h"
+#include "heart.h"
+#include <vector>
 
 class Ball
 {
@@ -17,20 +19,26 @@ private:
 	sf::Font font;
 	int score;
 	void scoreinit();
+	std::vector <Heart*> heartTab;
+	/*int poziom;*/
 public:
-	Ball(float x_in, float y_in, float rx_in, float ry_in);
+	Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart* lh);
 	void przesun(float x_in, float y_in);
 	sf::Sprite getBall();
 	void sprawdzKolizjeSciany();
-	void animuj(Paddle* pad, BlockTab* block);
+	void animuj(Paddle* pad, BlockTab* block, Heart* hrt, sf::RenderWindow& win);
 	int sprawdzKolizjeObiektu(sf::Sprite &sprite);
 	/*bool isCollidingWithBlock(Block* block);*/
-	//Metoda zbieraj¹ca isCllliding i potem z polem score dzaila?
 	/*int scorecount(Block* block);*/
 	//void scoreprint();
 	void drawt(sf::RenderWindow& window);
 	void scoreincr(sf::Sprite &sprite);
 	void setScore();
 	void velInit();
+	void utratahp(Heart *hrt, sf::RenderWindow &win);
+	void hpinit(sf::RenderWindow& window, Lifeheart* lh);
+	void hpdraw(sf::RenderWindow& window);
+	void hanima(Heart* hrt, sf::RenderWindow& win);
+	Heart* getpheart(int n);
 };
 

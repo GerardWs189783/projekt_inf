@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "ball.h"
 class Lifeheart
 {
 private:

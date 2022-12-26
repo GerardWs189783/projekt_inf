@@ -13,6 +13,8 @@
 
 void koniec(BlockTab* block);
 
+bool gover(Heart* hp, sf::Event *ev, bool *wait);
+
 int main()
 {
 	//Game game();
@@ -24,16 +26,16 @@ int main()
 	game.render();
 }*/
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
+	Lifeheart* life = new Lifeheart(window);
 	sf::Event event;
-	sf::Clock zegar,z;
+	sf::Clock zegar;
 	bool wait = true;
 	Paddle p1(400, 540);
-	Ball* pb = new Ball(300, 300, 800, 600);
+	Ball* pb = new Ball(300, 300,window,life);
 	//Block* b1 = new Block();
 	//Block2* b2 = new Block2();
 	BlockTab* bt = new BlockTab(window);
 	/*Block b1(200,200);*/
-	Lifeheart* life = new Lifeheart(window);
 	FPS* fps = new FPS();
 	Heart* heart = new Heart(window, life);
 	window.setFramerateLimit(60);
@@ -60,15 +62,17 @@ int main()
 		pb->drawt(window);
 		//b1->bdraw(window);
 		//b2->bdraw(window);
+		/*if(bt != NULL)*/
 		bt->draw(window);
 		fps->drawFPS(window);
 		life->draw(window);
 		heart->draw(window);
-		window.display();
-		if (wait == true)
+		window.display();	
+		if (wait == true && gover(heart, &event, &wait) == false)
 		{
+			gover(heart, &event, &wait);
 			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-				pb->animuj(&p1,bt);
+				pb->animuj(&p1,bt, heart, window);
 				//pb.sprawdzKolizjeObiektu(b2->getSprite());
 				zegar.restart();
 			}
@@ -90,4 +94,14 @@ void koniec(BlockTab* block) {
 		//dzia³a chociaz w petli wyœwietla to w nieskonczonosc. Powinno wyswietlic duzy napis w okienku i chyba zatrzymac poziom?
 	}
 
+}
+
+bool gover(Heart* hp, sf::Event *ev, bool *wait) {
+	if (hp->gethp() == 0 && *wait == true)
+	{
+		std::cout << "GAMEOVER" << std::endl;
+		*wait = false;
+		return true;
+	}
+	return false;
 }
