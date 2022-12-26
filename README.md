@@ -18,3 +18,5 @@ Arkanoid
 24.12 usuwanie elementów gdy stracą całe życie
 
 25.12 życie - sprite i napis
+
+26.12 utrata życia i gameover, pasek życia
