@@ -20,3 +20,5 @@ Arkanoid
 25.12 życie - sprite i napis
 
 26.12 utrata życia i gameover, pasek życia
+
+27.12 poprawa działania paska życia
