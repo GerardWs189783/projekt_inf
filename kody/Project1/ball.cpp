@@ -19,6 +19,7 @@ Ball::Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart *lh)
 	romzmiar_okna.y = window.getSize().y - pSprite.getGlobalBounds().height /*- 70*/;
 	ballbound = pSprite.getGlobalBounds();
 	score = 0;	
+	this->ilosc = 3;
 	this->scoreinit();
 	this->velInit();
 	this->hpinit(window,lh);
@@ -48,11 +49,13 @@ void Ball::sprawdzKolizjeSciany()
 		yVel = -abs(yVel);
 }
 
-void Ball::animuj(Paddle* pad, BlockTab* block, Heart* hrt, sf::RenderWindow& win)
+
+void Ball::animuj(Paddle* pad, BlockTab* block,/* Heart* hrt,*/ sf::RenderWindow& win)
 {
 	sf::Sprite sprite = pad->getSprite();
 
-	utratahp(hrt, win);
+	/*utratahp(hrt, win);*/
+	hanima(win);
 	sprawdzKolizjeSciany();
 	sprawdzKolizjeObiektu(sprite);
 	przesun(xVel, yVel);
@@ -192,7 +195,7 @@ void Ball::velInit()
 }
 
 void Ball::utratahp(Heart *hrt, sf::RenderWindow &win) {
-	if (position.y + pSprite.getGlobalBounds().height > win.getSize().y) {
+	if (position.y + pSprite.getGlobalBounds().height >= win.getSize().y) {
 		hrt->dechp();
 		pSprite.setPosition(sf::Vector2f(400.f,300.f));
 		yVel = 6;
@@ -201,8 +204,8 @@ void Ball::utratahp(Heart *hrt, sf::RenderWindow &win) {
 }
 
 void Ball::hpinit(sf::RenderWindow& window, Lifeheart* lh) {
-	int ilosc = 3;
-	for (int i = 0; i < ilosc; i++) {
+	
+	for (int i = 0; i < this->ilosc; i++) {
 		heartTab.push_back(new Heart(window, lh));
 
 		sf::FloatRect bound = ((Heart*)heartTab[i])->getBounds();
@@ -218,12 +221,19 @@ void Ball::hpdraw(sf::RenderWindow& window) {
 	}
 }
 
-void Ball::hanima(Heart* hrt, sf::RenderWindow& win) {
-	for (int i = 0; i < heartTab.size(); i++) {
-		// sprawdzanie utraty hp i usuwanie
-	}
+void Ball::hanima(sf::RenderWindow& win) {
+	
+	if (((Heart*)heartTab[heartTab.size() - 1])->gethp() > 0)
+		utratahp(heartTab[heartTab.size() - 1], win);
+	else
+		heartTab.pop_back();
+	
 }
 
 Heart* Ball::getpheart(int n) {
 	return (Heart*)heartTab[n];
+}
+
+int Ball::hpTabsize() {
+	return heartTab.size();
 }

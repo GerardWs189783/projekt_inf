@@ -20,13 +20,14 @@ private:
 	int score;
 	void scoreinit();
 	std::vector <Heart*> heartTab;
+	int ilosc;
 	/*int poziom;*/
 public:
 	Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart* lh);
 	void przesun(float x_in, float y_in);
 	sf::Sprite getBall();
 	void sprawdzKolizjeSciany();
-	void animuj(Paddle* pad, BlockTab* block, Heart* hrt, sf::RenderWindow& win);
+	void animuj(Paddle* pad, BlockTab* block/*, Heart* hrt*/, sf::RenderWindow& win);
 	int sprawdzKolizjeObiektu(sf::Sprite &sprite);
 	/*bool isCollidingWithBlock(Block* block);*/
 	/*int scorecount(Block* block);*/
@@ -38,7 +39,8 @@ public:
 	void utratahp(Heart *hrt, sf::RenderWindow &win);
 	void hpinit(sf::RenderWindow& window, Lifeheart* lh);
 	void hpdraw(sf::RenderWindow& window);
-	void hanima(Heart* hrt, sf::RenderWindow& win);
+	void hanima(sf::RenderWindow& win);
 	Heart* getpheart(int n);
+	int hpTabsize();
 };
 
