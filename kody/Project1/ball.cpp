@@ -1,8 +1,6 @@
 #include "ball.h"
-#include "block.h"
-#include <iostream>
-#include "paddle.h"
 
+//std::random_device rd1;
 
 Ball::Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart *lh)
 {
@@ -50,14 +48,15 @@ void Ball::sprawdzKolizjeSciany()
 }
 
 
-void Ball::animuj(Paddle* pad, BlockTab* block,/* Heart* hrt,*/ sf::RenderWindow& win)
+void Ball::animuj(Paddle* pad, BlockTab* block,sf::RenderWindow& win, bool* wait)
 {
 	sf::Sprite sprite = pad->getSprite();
 
 	/*utratahp(hrt, win);*/
-	hanima(win);
+	hanima(win,wait,pad);
 	sprawdzKolizjeSciany();
 	sprawdzKolizjeObiektu(sprite);
+	
 	przesun(xVel, yVel);
 	/*int n = block->getsize();*/
 	//int n = block->bTabsize();
@@ -194,13 +193,18 @@ void Ball::velInit()
 	this->xVel = 6;
 }
 
-void Ball::utratahp(Heart *hrt, sf::RenderWindow &win) {
-	if (position.y + pSprite.getGlobalBounds().height >= win.getSize().y) {
+bool Ball::utratahp(Heart *hrt, sf::RenderWindow &win, bool* wait, Paddle* p) {
+	/*sf::Clock clock;*/
+	if (position.y + pSprite.getGlobalBounds().height + 10 >= win.getSize().y) {
 		hrt->dechp();
-		pSprite.setPosition(sf::Vector2f(400.f,300.f));
-		yVel = 6;
+		yVel = this->yVel;
 		std::cout << "HP: " << hrt->gethp() << std::endl;
+		hppause(win,wait,p);
+		/*setrandpos(win);*/
+		return true;
+		
 	}
+	return false;
 }
 
 void Ball::hpinit(sf::RenderWindow& window, Lifeheart* lh) {
@@ -221,10 +225,10 @@ void Ball::hpdraw(sf::RenderWindow& window) {
 	}
 }
 
-void Ball::hanima(sf::RenderWindow& win) {
+void Ball::hanima(sf::RenderWindow& win, bool* wait, Paddle* p) {
 	
 	if (((Heart*)heartTab[heartTab.size() - 1])->gethp() > 0)
-		utratahp(heartTab[heartTab.size() - 1], win);
+		utratahp(heartTab[heartTab.size() - 1], win,wait,p);
 	else
 		heartTab.pop_back();
 	
@@ -236,4 +240,33 @@ Heart* Ball::getpheart(int n) {
 
 int Ball::hpTabsize() {
 	return heartTab.size();
+}
+
+//bool Ball::hppause(sf::RenderWindow& win, bool* wait) {
+//	if (position.y + pSprite.getGlobalBounds().height + 10 >= win.getSize().y) {
+//		*wait = false;
+//		
+//		return true;
+//		/*sf::Clock* clock = new sf::Clock;
+//		if (clock->getElapsedTime().asSeconds() > 3.0f) {
+//			delete clock;
+//			*wait = true;
+//		}*/
+//	}
+//	return false;
+//}
+
+void Ball::hppause(sf::RenderWindow& win, bool* wait, Paddle* p) {
+
+	*wait = false;
+	setrandpos(win,p);
+	
+}
+
+
+void Ball::setrandpos(sf::RenderWindow& win, Paddle *p) {
+	/*std::mt19937 gen(rd1());
+	std::uniform_int_distribution<> distX(0, 700);
+	int px = distX(gen);*/
+	pSprite.setPosition(sf::Vector2f(p->getpos().x - pSprite.getGlobalBounds().width / 2, p->getpos().y - pSprite.getGlobalBounds().height));
 }

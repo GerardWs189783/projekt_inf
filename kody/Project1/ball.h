@@ -5,6 +5,8 @@
 #include "blockTab.h"
 #include "heart.h"
 #include <vector>
+#include <random>
+#include <iostream>
 
 class Ball
 {
@@ -27,7 +29,7 @@ public:
 	void przesun(float x_in, float y_in);
 	sf::Sprite getBall();
 	void sprawdzKolizjeSciany();
-	void animuj(Paddle* pad, BlockTab* block/*, Heart* hrt*/, sf::RenderWindow& win);
+	void animuj(Paddle* pad, BlockTab* block, sf::RenderWindow& win, bool* wait);
 	int sprawdzKolizjeObiektu(sf::Sprite &sprite);
 	/*bool isCollidingWithBlock(Block* block);*/
 	/*int scorecount(Block* block);*/
@@ -36,11 +38,14 @@ public:
 	void scoreincr(sf::Sprite &sprite);
 	void setScore();
 	void velInit();
-	void utratahp(Heart *hrt, sf::RenderWindow &win);
+	bool utratahp(Heart *hrt, sf::RenderWindow &win, bool* wait, Paddle* p);
 	void hpinit(sf::RenderWindow& window, Lifeheart* lh);
 	void hpdraw(sf::RenderWindow& window);
-	void hanima(sf::RenderWindow& win);
+	void hanima(sf::RenderWindow& win, bool* wait, Paddle* p);
 	Heart* getpheart(int n);
 	int hpTabsize();
+	/*bool hppause(sf::RenderWindow& win, bool *wait);*/
+	void hppause(sf::RenderWindow& win, bool* wait, Paddle* p);
+	void setrandpos(sf::RenderWindow& win, Paddle *p);
 };
 

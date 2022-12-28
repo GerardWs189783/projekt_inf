@@ -12,6 +12,7 @@ public:
 
 	sf::Sprite getSprite();
 	sf::Sprite* getSpritep();
+	sf::Vector2f getpos();
 
 	void pdraw(sf::RenderWindow& window);
 };

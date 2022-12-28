@@ -30,6 +30,7 @@ int main()
 	Lifeheart* life = new Lifeheart(window);
 	sf::Event event;
 	sf::Clock zegar;
+	/*sf::Clock* z = new sf::Clock;*/
 	bool wait = true;
 	Paddle p1(400, 540);
 	Ball* pb = new Ball(300, 300, window, life);
@@ -41,7 +42,7 @@ int main()
 	/*Heart* heart = new Heart(window, life);*/
 	window.setFramerateLimit(60);
 
-	while (window.isOpen())
+	while (window.isOpen() )
 	{
 		while (window.pollEvent(event))
 		{
@@ -78,21 +79,21 @@ int main()
 		//	}
 		//	
 		//}
+		
 		if (wait == true && gover(pb, &event, &wait) == false)
 			{
 				gover(pb, &event, &wait);
+				
 				if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-					pb->animuj(&p1,bt/*, heart*/, window);
-					/*pb->hanima(window);*/
-					//pb.sprawdzKolizjeObiektu(b2->getSprite());
+					/*pb->hppause(window, &wait);*/ // pauza i gracz wznawia przy utracie zycia?
+					
+					pb->animuj(&p1,bt, window,&wait);
+					
 					zegar.restart();
 				}
-				/*if (z.getElapsedTime().asMilliseconds() > 1000.f)
-				{
-					b1.move();
-					z.restart();
-				}*/
+				
 			}
+		
 	}
 		//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
 		return 0;

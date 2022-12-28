@@ -26,6 +26,11 @@ sf::Sprite* Paddle::getSpritep() {
 	return &skin;
 }
 
+sf::Vector2f Paddle::getpos()
+{
+	return position;
+}
+
 void Paddle::pdraw(sf::RenderWindow& window) {
 	window.draw(skin);
 }
