@@ -24,3 +24,5 @@ Arkanoid
 27.12 poprawa działania paska życia
 
 28.12 reset pozycji gracza po utracie życia i wznowienie gry
+
+29.12 dodanie menu i poruszanie sie po opcjach menu
