@@ -22,3 +22,5 @@ Arkanoid
 26.12 utrata życia i gameover, pasek życia
 
 27.12 poprawa działania paska życia
+
+28.12 reset pozycji gracza po utracie życia i wznowienie gry
