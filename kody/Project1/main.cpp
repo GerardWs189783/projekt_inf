@@ -10,6 +10,7 @@
 #include "block2.h"
 #include "lifeheart.h"
 #include "heart.h"
+#include "Menu.h"
 
 void koniec(BlockTab* block);
 
@@ -18,28 +19,16 @@ bool gover(Ball* b, sf::Event* ev, bool* wait);
 
 int main()
 {
-	//Game game();
-	/*while (game.running())
-	{
-	//Event poll w game
-	//Tu tylko update i render
-	game.update();
-	game.render();
-}*/
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
-	Lifeheart* life = new Lifeheart(window);
+	Menu* menu = new Menu(window);
+	//Lifeheart* life = new Lifeheart(window);
 	sf::Event event;
 	sf::Clock zegar;
-	/*sf::Clock* z = new sf::Clock;*/
 	bool wait = true;
-	Paddle p1(400, 540);
-	Ball* pb = new Ball(300, 300, window, life);
-	//Block* b1 = new Block();
-	//Block2* b2 = new Block2();
-	BlockTab* bt = new BlockTab(window);
-	/*Block b1(200,200);*/
-	FPS* fps = new FPS();
-	/*Heart* heart = new Heart(window, life);*/
+	//Paddle p1(400, 540);
+	//Ball* pb = new Ball(300, 300, window, life);
+	//BlockTab* bt = new BlockTab(window);
+	//FPS* fps = new FPS();
 	window.setFramerateLimit(60);
 
 	while (window.isOpen() )
@@ -49,51 +38,60 @@ int main()
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				window.close();
 
-			if (event.type == sf::Event::MouseMoved && wait == true) {
+			/*if (event.type == sf::Event::MouseMoved && wait == true) {
 				p1.move(sf::Vector2f(sf::Mouse::getPosition(window).x, 540));
-			}
+			}*/
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 				wait = !wait;
 
+			if (event.type == sf::Event::KeyReleased) {
+				if (event.key.code == sf::Keyboard::Up) {
+					menu->menuUp();
+					/*menu->spritesetpos();*/
+					break;
+				}
+				if (event.key.code == sf::Keyboard::Down) {
+					menu->menuDown();
+					/*menu->spritesetpos();*/
+					break;
+				}
+			}
 		}
-		fps->FPSrate();
+		/*fps->FPSrate();
 		window.clear(sf::Color::Blue);
 		p1.pdraw(window);
-		/*window.draw(pb.getBall());*/
 		pb->drawt(window);
-		//b1->bdraw(window);
-		//b2->bdraw(window);
-		/*if(bt != NULL)*/
 		bt->draw(window);
 		fps->drawFPS(window);
 		life->draw(window);
-		pb->hpdraw(window);
-		/*heart->draw(window);*/
-		window.display();
-		//if (wait == true) {
-		//	if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-		//		pb->animuj(&p1, bt/*, heart*/, window);
-		//		//pb.sprawdzKolizjeObiektu(b2->getSprite());
-		//		zegar.restart();
-		//	}
-		//	
-		//}
+		pb->hpdraw(window);*/
+		window.clear(sf::Color::Black);
+		menu->backdraw(window);
+		menu->drawmenu(window);
+		menu->drawsprt(window);
 		
-		if (wait == true && gover(pb, &event, &wait) == false)
+		window.display();
+		
+		
+		/*if (wait == true && gover(pb, &event, &wait) == false)
 			{
 				gover(pb, &event, &wait);
 				
 				if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-					/*pb->hppause(window, &wait);*/ // pauza i gracz wznawia przy utracie zycia?
 					
 					pb->animuj(&p1,bt, window,&wait);
 					
 					zegar.restart();
 				}
 				
-			}
-		
+			}*/
+		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
+
+			menu->spritesetpos();
+
+			zegar.restart();
+		}
 	}
 		//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
 		return 0;
