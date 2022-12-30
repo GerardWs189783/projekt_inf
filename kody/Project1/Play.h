@@ -1,16 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Play.h"
+#include "Menu.h"
 
 #define Optnumb 4
 
-class Menu
+class Play
 {
 protected:
-	int menuindex;
+	int playindex;
+	int draw;
 	sf::Font font;
-	sf::Text menu[Optnumb];
-	sf::Sprite menusprite;
+	sf::Text play[Optnumb];
+	sf::Sprite playsprite;
 	sf::Texture tsprt;
 	sf::Vector2f position;
 	sf::Sprite background;
@@ -18,22 +19,24 @@ protected:
 	/*sf::RenderWindow* window;*/
 
 public:
-	Menu(sf::RenderWindow &window);
-	void menuUp();
-	void menuDown();
-	int getMenuIndex();
-	void drawmenu(sf::RenderWindow& window);
+	Play(sf::RenderWindow& window);
+	~Play();
+	void playUp();
+	void playDown();
+	int getPlayIndex();
+	void drawplay(sf::RenderWindow& window);
 	void optinit(sf::RenderWindow& window);
 	void spriteinit();
 	void drawsprt(sf::RenderWindow& window);
 	void spritesetpos();
 	void backinit(sf::RenderWindow& window);
 	void backdraw(sf::RenderWindow& window);
-	void menuinit(sf::RenderWindow& window);
+	void playinit(sf::RenderWindow& window);
 	void drawall(sf::RenderWindow& window);
-	/*void runmenu(sf::RenderWindow& window);*/
-	void menuevents(sf::RenderWindow& window, sf::Event &event/*,Play* pl*/);
-	/*sf::RenderWindow* getMenuWin();*/
-	
+	void runplay(sf::RenderWindow& window, sf::Event event);
+	void playevents(sf::RenderWindow& window,sf::Event &event);
+	int getdraw();
+	/*Play();
+	void playsetString();*/
 };
 

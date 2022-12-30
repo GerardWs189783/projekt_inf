@@ -17,7 +17,7 @@ Ball::Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart *lh)
 	romzmiar_okna.y = window.getSize().y - pSprite.getGlobalBounds().height /*- 70*/;
 	ballbound = pSprite.getGlobalBounds();
 	score = 0;	
-	this->ilosc = 3;
+	this->ilosc = 1;
 	this->scoreinit();
 	this->velInit();
 	this->hpinit(window,lh);

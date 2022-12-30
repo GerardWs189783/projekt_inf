@@ -152,6 +152,7 @@
     <ClCompile Include="lifeheart.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="paddle.cpp" />
+    <ClCompile Include="Play.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Źródło.cpp" />
     <ClCompile Include="Źródło1.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="lifeheart.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="paddle.h" />
+    <ClInclude Include="Play.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

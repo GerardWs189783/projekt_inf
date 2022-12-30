@@ -19,82 +19,66 @@ bool gover(Ball* b, sf::Event* ev, bool* wait);
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
-	Menu* menu = new Menu(window);
+	Game* game = new Game();
+	game->rungame();
+	/*Menu* menu = new Menu();
+	menu->runmenu();
+	delete menu;
+	menu = nullptr;*/
+	//sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
 	//Lifeheart* life = new Lifeheart(window);
-	sf::Event event;
-	sf::Clock zegar;
-	bool wait = true;
+	//sf::Event event;
+	//sf::Clock zegar;
+	//bool wait = false;
 	//Paddle p1(400, 540);
 	//Ball* pb = new Ball(300, 300, window, life);
 	//BlockTab* bt = new BlockTab(window);
 	//FPS* fps = new FPS();
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 
-	while (window.isOpen() )
-	{
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
-				window.close();
+	//while (window.isOpen() )
+	//{
+	//	while (window.pollEvent(event))
+	//	{
+	//		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
+	//			window.close();
 
-			/*if (event.type == sf::Event::MouseMoved && wait == true) {
-				p1.move(sf::Vector2f(sf::Mouse::getPosition(window).x, 540));
-			}*/
+	//		if (event.type == sf::Event::MouseMoved && wait == true) {
+	//			p1.move(sf::Vector2f(sf::Mouse::getPosition(window).x, 540));
+	//		}
 
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
-				wait = !wait;
+	//		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+	//			wait = !wait;
 
-			if (event.type == sf::Event::KeyReleased) {
-				if (event.key.code == sf::Keyboard::Up) {
-					menu->menuUp();
-					/*menu->spritesetpos();*/
-					break;
-				}
-				if (event.key.code == sf::Keyboard::Down) {
-					menu->menuDown();
-					/*menu->spritesetpos();*/
-					break;
-				}
-			}
-		}
-		/*fps->FPSrate();
-		window.clear(sf::Color::Blue);
-		p1.pdraw(window);
-		pb->drawt(window);
-		bt->draw(window);
-		fps->drawFPS(window);
-		life->draw(window);
-		pb->hpdraw(window);*/
-		window.clear(sf::Color::Black);
-		menu->backdraw(window);
-		menu->drawmenu(window);
-		menu->drawsprt(window);
-		
-		window.display();
-		
-		
-		/*if (wait == true && gover(pb, &event, &wait) == false)
-			{
-				gover(pb, &event, &wait);
-				
-				if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-					
-					pb->animuj(&p1,bt, window,&wait);
-					
-					zegar.restart();
-				}
-				
-			}*/
-		if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
-
-			menu->spritesetpos();
-
-			zegar.restart();
-		}
-	}
-		//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
-		return 0;
+	//		
+	//	}
+	//	fps->FPSrate();
+	//	window.clear(sf::Color::Blue);
+	//	p1.pdraw(window);
+	//	pb->drawt(window);
+	//	bt->draw(window);
+	//	fps->drawFPS(window);
+	//	life->draw(window);
+	//	pb->hpdraw(window);		
+	//	window.display();
+	//	
+	//	
+	//	if (wait == true && gover(pb, &event, &wait) == false)
+	//		{
+	//			gover(pb, &event, &wait);
+	//			
+	//			if (zegar.getElapsedTime().asMilliseconds() > 5.0f) {
+	//				
+	//				pb->animuj(&p1,bt, window,&wait);
+	//				
+	//				zegar.restart();
+	//			}
+	//			
+	//		}
+	//
+	//}
+	//	//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
+	//	return 0;
 	
 }
 

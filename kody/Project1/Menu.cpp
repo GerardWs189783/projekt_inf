@@ -1,11 +1,11 @@
 #include "Menu.h"
 
-Menu::Menu(sf::RenderWindow &window)
+
+Menu::Menu(sf::RenderWindow& window)
 {
-	backinit(window);
-	optinit(window);
+	/*window = new sf::RenderWindow();*/
 	this->menuindex = 0;
-	spriteinit(window);
+	menuinit(window);
 	
 }
 
@@ -39,7 +39,7 @@ void Menu::menuDown()
 
 int Menu::getMenuIndex()
 {
-	return this->menuindex;
+	return menuindex;
 }
 
 void Menu::drawmenu(sf::RenderWindow& window)
@@ -79,7 +79,7 @@ void Menu::optinit(sf::RenderWindow& window)
 	menu[3].setString("EXIT");
 }
 
-void Menu::spriteinit(sf::RenderWindow& window)
+void Menu::spriteinit()
 {	
 	tsprt.loadFromFile("zdj/trock.png");
 	menusprite.setTexture(tsprt);	
@@ -109,10 +109,76 @@ void Menu::backinit(sf::RenderWindow& window)
 	background.setTexture(tback);
 	/*background.setScale(sf::Vector2f(100.f / background.getLocalBounds().width, 80.f / background.getLocalBounds().height));*/
 	background.setOrigin(sf::Vector2f(background.getLocalBounds().width / 2.f, background.getLocalBounds().height / 2.f));
-	background.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	background.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 }
 
 void Menu::backdraw(sf::RenderWindow& window)
 {
 	window.draw(background);
 }
+
+void Menu::menuinit(sf::RenderWindow& window)
+{
+	//window->create(sf::VideoMode(800, 600), "Arkanoid");
+	//window->setFramerateLimit(60);
+	backinit(window);
+	optinit(window);
+	spriteinit();
+}
+
+void Menu::drawall(sf::RenderWindow& window)
+{
+	window.clear(sf::Color::Black);
+	backdraw(window);
+	drawmenu(window);
+	drawsprt(window);
+	window.display();
+}
+
+//void Menu::runmenu(sf::RenderWindow& window)
+//{
+//	while (window.isOpen()) {
+//		menuevents(window);
+//		drawall(window);
+//		spritesetpos();
+//	}
+//}
+
+void Menu::menuevents(sf::RenderWindow& window,sf::Event &event/* Play* pl*/)
+{
+	/*sf::Event event;*/
+
+	while (window.pollEvent(event)) {
+		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+			window.close();
+		}
+		if (event.type == sf::Event::KeyReleased) {
+			if (event.key.code == sf::Keyboard::Up) {
+				menuUp();
+				break;
+			}
+			if (event.key.code == sf::Keyboard::Down) {
+				menuDown();
+				break;
+			}
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && getMenuIndex() == Optnumb - 1) {
+			window.close();
+			break;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && getMenuIndex() == 0) {
+			Play* pl = new Play(window);
+			pl->runplay(window,event);
+			delete pl;
+			pl = nullptr;
+			break;
+			//poll event dla Game - silinika?, trzeba tak, aby móc zmieniaæ w kó³ko
+		}
+
+	}
+
+}
+
+//sf::RenderWindow* getMenuWin() {
+//	return window;
+//}
