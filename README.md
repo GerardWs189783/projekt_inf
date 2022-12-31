@@ -28,3 +28,5 @@ Arkanoid
 29.12 dodanie menu i poruszanie sie po opcjach menu
 
 30.12 rozwijanie menu i przechodzenie do różnych opcji menu; przenoszenie projektu do klasy symulującej silnik gry
+
+31.12 przenoszenie do silnika samej gry, rozwijanie menu
