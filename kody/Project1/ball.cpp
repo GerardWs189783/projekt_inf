@@ -2,15 +2,14 @@
 
 //std::random_device rd1;
 
-Ball::Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart *lh)
+Ball::Ball(sf::RenderWindow& window, Lifeheart *lh)
 {
-	this->position.x = x_in;
-	this->position.y = y_in;
+
 	//romzmiar_okna.x = rx_in - 70;
 	//romzmiar_okna.y = ry_in - 70;
 	this->tekstura.loadFromFile("zdj/shrokjj.png");
 	pSprite.setTexture(tekstura);
-	pSprite.setPosition(position);
+	
 	pSprite.setScale(sf::Vector2f(70.f / pSprite.getLocalBounds().width, 70.f / pSprite.getLocalBounds().height));
 	/*pSprite.setOrigin(pSprite.getGlobalBounds().width/2.f, pSprite.getGlobalBounds().height/2.f);*/
 	romzmiar_okna.x = window.getSize().x - pSprite.getGlobalBounds().width /*-70*/;
@@ -21,6 +20,9 @@ Ball::Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart *lh)
 	this->scoreinit();
 	this->velInit();
 	this->hpinit(window,lh);
+	this->position.x = window.getSize().x / 2.0f - (0.7)*pSprite.getGlobalBounds().width ;
+	this->position.y = window.getSize().y / 2.0f + 100;
+	pSprite.setPosition(position);
 }
 
 void Ball::przesun(float x_in, float y_in)

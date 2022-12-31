@@ -1,9 +1,9 @@
 #include "paddle.h"
 
-Paddle::Paddle(float x_in, float y_in)
+Paddle::Paddle(sf::RenderWindow& window)
 {
-	position.x = x_in;
-	position.y = y_in;
+	position.x = window.getSize().x / 2.0f;
+	position.y = (0.9)*window.getSize().y;
 	tekstura.loadFromFile("zdj/oak.jpg");
 	skin.setTexture(tekstura);
 	skin.setPosition(position);

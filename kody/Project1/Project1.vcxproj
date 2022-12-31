@@ -149,6 +149,7 @@
     <ClCompile Include="fps.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="heart.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="lifeheart.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="paddle.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="fps.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="heart.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="lifeheart.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="paddle.h" />

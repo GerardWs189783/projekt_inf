@@ -46,6 +46,7 @@ void Game::pollEvent()
 			break;
 			//poll event dla Game - silinika?, trzeba tak, aby móc zmieniaæ w kó³ko
 		}
+
 	}
 
 		

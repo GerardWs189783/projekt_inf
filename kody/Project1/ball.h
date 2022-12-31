@@ -25,7 +25,7 @@ private:
 	int ilosc;
 	/*int poziom;*/
 public:
-	Ball(float x_in, float y_in,sf::RenderWindow& window, Lifeheart* lh);
+	Ball(sf::RenderWindow& window, Lifeheart* lh);
 	void przesun(float x_in, float y_in);
 	sf::Sprite getBall();
 	void sprawdzKolizjeSciany();

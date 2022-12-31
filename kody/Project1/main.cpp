@@ -21,17 +21,22 @@ int main()
 {
 	Game* game = new Game();
 	game->rungame();
-	/*Menu* menu = new Menu();
-	menu->runmenu();
-	delete menu;
-	menu = nullptr;*/
+	delete game;
+	game = nullptr;
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
+	window.setFramerateLimit(60);
+	sf::Event event;
+	Level* level = new Level(window);
+	level->runLevel(window, event);
+	delete level;
+	level = nullptr;
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
 	//Lifeheart* life = new Lifeheart(window);
 	//sf::Event event;
 	//sf::Clock zegar;
 	//bool wait = false;
-	//Paddle p1(400, 540);
-	//Ball* pb = new Ball(300, 300, window, life);
+	//Paddle p1(window);
+	//Ball* pb = new Ball(/*300, 300, */window, life);
 	//BlockTab* bt = new BlockTab(window);
 	//FPS* fps = new FPS();
 	//window.setFramerateLimit(60);
@@ -77,8 +82,8 @@ int main()
 	//		}
 	//
 	//}
-	//	//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
-	//	return 0;
+		//, trzeba dodaæ pozosta³ych przeciwników i ustawiæ poziomy trudnoœci, menu wyboru, menu pauzy, zapis wyniku
+		return 0;
 	
 }
 

@@ -7,7 +7,7 @@ private:
 	sf::Texture tekstura;
 	sf::Sprite skin;
 public:
-	Paddle(float x_in, float y_in);
+	Paddle(sf::RenderWindow& window);
 	void move(sf::Vector2f mov);
 
 	sf::Sprite getSprite();

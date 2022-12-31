@@ -159,6 +159,7 @@ void Play::runplay(sf::RenderWindow& window,sf::Event event)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && getPlayIndex() == Optnumb - 1) {
 			draw = 1;
 			/*window.close();*/
+			// czyli tutaj mo¿na daæ level run i ma warunek na while ze albo gover albo koniec j¹ konczy i wraca do poprzedniego okna
 			break;
 		}
 		drawall(window);
@@ -170,7 +171,7 @@ void Play::playevents(sf::RenderWindow& window, sf::Event &event)
 {
 	/*sf::Event event;*/
 
-	while (window.pollEvent(event) && draw == 0) {
+	while (window.pollEvent(event)/* && draw == 0*/) {
 		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 			window.close();
 		}
