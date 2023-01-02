@@ -18,12 +18,13 @@ Play::Play(sf::RenderWindow& window)
 	/*this->window = new sf::RenderWindow();*/
 	this->playindex = 0;
 	playinit(window);
-	draw = 0;
+	draw = true;
 
 }
 
 Play::~Play()
 {
+
 }
 
 void Play::playUp()
@@ -152,42 +153,73 @@ void Play::drawall(sf::RenderWindow& window)
 	window.display();
 }
 
-void Play::runplay(sf::RenderWindow& window,sf::Event event)
+void Play::runplay(sf::RenderWindow& window,sf::Event &event)
 {
-	while (window.isOpen() && draw == 0) {
-		playevents(window,event);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && getPlayIndex() == Optnumb - 1) {
-			draw = 1;
-			/*window.close();*/
-			// czyli tutaj mo¿na daæ level run i ma warunek na while ze albo gover albo koniec j¹ konczy i wraca do poprzedniego okna
-			break;
-		}
+	/*sf::Event event1;*/
+	while (window.isOpen() && draw == true) {
+		playevents(window, event);
 		drawall(window);
 		spritesetpos();
+		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && getPlayIndex() == Optnumb - 1) {
+		//	draw = 1;
+		//	/*window.close();*/
+		//	// czyli tutaj mo¿na daæ level run i ma warunek na while ze albo gover albo koniec j¹ konczy i wraca do poprzedniego okna
+		//	break;
+		//}
+
+		//sf::Event event1;
+		//while (window.pollEvent(event1)) {
+		//	if ((event1.type == sf::Event::KeyPressed && event1.key.code == sf::Keyboard::Enter) && getPlayIndex() == Optnumb - 1) {
+		//		draw = 1;
+		//		/*window.close();*/
+		//		// czyli tutaj mo¿na daæ level run i ma warunek na while ze albo gover albo koniec j¹ konczy i wraca do poprzedniego okna
+		//		break;
+		//	}
+		//}
+
+
 	}
 }
 
 void Play::playevents(sf::RenderWindow& window, sf::Event &event)
 {
-	/*sf::Event event;*/
+		/*sf::Event event1;*/
+		while (window.pollEvent(event)/* && draw == true*/) {
 
-	while (window.pollEvent(event)/* && draw == 0*/) {
-		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-			window.close();
-		}
-		if (event.type == sf::Event::KeyReleased) {
-			if (event.key.code == sf::Keyboard::Up) {
-				playUp();
+			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+				window.close();
+			}
+			if (event.type == sf::Event::KeyReleased) {
+				if (event.key.code == sf::Keyboard::Up) {
+					playUp();
+					break;
+				}
+				if (event.key.code == sf::Keyboard::Down) {
+					playDown();
+					break;
+				}
+
+			}
+			if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && getPlayIndex() == Optnumb - 1) {
+				draw = !draw;
+				/*window.close();*/
+				// czyli tutaj mo¿na daæ level run i ma warunek na while ze albo gover albo koniec j¹ konczy i wraca do poprzedniego okna
 				break;
 			}
-			if (event.key.code == sf::Keyboard::Down) {
-				playDown();
+			if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && getPlayIndex() == 0) {
+				std::cout << "LEVEL 1" << std::endl;
+				level = new Level(window);
+				level->runLevel(window, event);
+				delete level;
+				level = nullptr;
 				break;
 			}
-		}
-		
 
 	}
+	
+	
+	
+	
 
 }
 

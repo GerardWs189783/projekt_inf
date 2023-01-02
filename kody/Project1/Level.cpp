@@ -12,15 +12,16 @@ Level::~Level()
 	delete ball;
 	delete fps;
 	delete blockt;
+	std::cout << "Usunieto Level 1" << std::endl;
 }
 
 void Level::runLevel(sf::RenderWindow& window, sf::Event &event)
 {
-	while (window.isOpen()) {
+	while (window.isOpen() && gover(ball, &event, &wait) == false) {
 		eventLevel(window, event);
 		drawLevel(window);
-		if (wait == true && gover(ball, &event, &wait) == false){
-			gover(ball, &event, &wait);
+		if (wait == true/* && gover(ball, &event, &wait) == false*/){
+			/*gover(ball, &event, &wait);*/
 
 			if (this->zegar.getElapsedTime().asMilliseconds() > 5.0f) {
 
@@ -46,6 +47,7 @@ void Level::initLevel(sf::RenderWindow& window)
 
 void Level::drawLevel(sf::RenderWindow& window)
 {
+	fps->FPSrate();
 	window.clear(sf::Color::Blue);
 	lh->draw(window);
 	paddle->pdraw(window);
@@ -67,7 +69,7 @@ void Level::eventLevel(sf::RenderWindow& window, sf::Event &event)
 			paddle->move(sf::Vector2f(sf::Mouse::getPosition(window).x, 540));
 		}
 
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P /*tu jeszcze ze gdy gover to nie mozna uzyc tylko enter by wrocic*/)
 			wait = !wait;
 
 
@@ -80,7 +82,7 @@ void Level::koniec(BlockTab* block)
 
 bool Level::gover(Ball* b, sf::Event* ev, bool* wait)
 {
-	if (b->hpTabsize() == 0 && *wait == true) {
+	if (b->hpTabsize() == 0 /*&& *wait == true*/) {
 		std::cout << "GAMEOVER" << std::endl;
 		*wait = false;
 		return true;

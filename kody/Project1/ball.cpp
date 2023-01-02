@@ -197,10 +197,11 @@ void Ball::velInit()
 
 bool Ball::utratahp(Heart *hrt, sf::RenderWindow &win, bool* wait, Paddle* p) {
 	/*sf::Clock clock;*/
-	if (position.y + pSprite.getGlobalBounds().height + 10 >= win.getSize().y) {
+	if (position.y + pSprite.getGlobalBounds().height + 10 >= win.getSize().y ) {
 		hrt->dechp();
 		yVel = this->yVel;
 		std::cout << "HP: " << hrt->gethp() << std::endl;
+		/*if(heartTab.size() != 0)*/
 		hppause(win,wait,p);
 		/*setrandpos(win);*/
 		return true;
@@ -229,8 +230,9 @@ void Ball::hpdraw(sf::RenderWindow& window) {
 
 void Ball::hanima(sf::RenderWindow& win, bool* wait, Paddle* p) {
 	
-	if (((Heart*)heartTab[heartTab.size() - 1])->gethp() > 0)
-		utratahp(heartTab[heartTab.size() - 1], win,wait,p);
+	if (((Heart*)heartTab[heartTab.size() - 1])->gethp() > 0 /*&& heartTab.size() != 0*/) {
+		utratahp(heartTab[heartTab.size() - 1], win, wait, p);
+	}
 	else
 		heartTab.pop_back();
 	

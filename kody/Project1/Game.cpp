@@ -5,6 +5,7 @@ Game::Game()
 	window = new sf::RenderWindow();
 	gameinit();
 	menu = new Menu(*window);
+	play = nullptr;
 }
 
 void Game::pollEvent()
@@ -31,22 +32,24 @@ void Game::pollEvent()
 				break;
 			}
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && menu->getMenuIndex() == Optnumb - 1) {
+		if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && menu->getMenuIndex() == Optnumb - 1) {
 			window->close();
 			break;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && menu->getMenuIndex() == 0) {
-			Play* pl = new Play(*window);
-			pl->runplay(*window, event);
-			delete pl;
-			pl = nullptr;
-			/*if (pl == nullptr) {
-				std::cout << "No ni ma" << std::endl;
-			}*/
+		if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && menu->getMenuIndex() == 0 && play ==nullptr) {
+			//delete menu i nullptr
+			delete menu;
+			menu = nullptr;
+			play = new Play(*window);
+			play->runplay(*window, event);
+			std::cout << "Koniec play" << std::endl;
+			delete play;
+			play = nullptr;
 			break;
+			
 			//poll event dla Game - silinika?, trzeba tak, aby móc zmieniaæ w kó³ko
 		}
-
+		
 	}
 
 		
@@ -61,6 +64,15 @@ void Game::rungame()
 		/*menu->runmenu(*window);*/
 		menu->spritesetpos();
 		pollEvent();
+		//if (play != nullptr && menu == nullptr) {
+		//	play->runplay(*window, event);
+		//	delete play;
+		//	play = nullptr;
+		//}
+		if (play ==nullptr && menu == nullptr) {
+			std::cout << "Nowe menu" << std::endl;
+			menu = new Menu(*window);
+		}
 		render();
 	}
 	/*menu->runmenu(*window);*/

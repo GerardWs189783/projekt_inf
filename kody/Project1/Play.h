@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Menu.h"
+//#include "Menu.h"
+#include "Level.h"
+#include <iostream>
 
 #define Optnumb 4
 
@@ -8,7 +10,7 @@ class Play
 {
 protected:
 	int playindex;
-	int draw;
+	bool draw;
 	sf::Font font;
 	sf::Text play[Optnumb];
 	sf::Sprite playsprite;
@@ -16,6 +18,9 @@ protected:
 	sf::Vector2f position;
 	sf::Sprite background;
 	sf::Texture tback;
+	Level* level;
+	int state;
+	// int state jako parametr do level, ten parametr bedzie zmieniany w zaleznosci od tego czy gre przegrano czy wygrano i tworzyl nowa badz wracal do menu
 	/*sf::RenderWindow* window;*/
 
 public:
@@ -33,7 +38,7 @@ public:
 	void backdraw(sf::RenderWindow& window);
 	void playinit(sf::RenderWindow& window);
 	void drawall(sf::RenderWindow& window);
-	void runplay(sf::RenderWindow& window, sf::Event event);
+	void runplay(sf::RenderWindow& window, sf::Event &event);
 	void playevents(sf::RenderWindow& window,sf::Event &event);
 	int getdraw();
 	/*Play();
