@@ -23,6 +23,7 @@ private:
 	void scoreinit();
 	std::vector <Heart*> heartTab;
 	int ilosc;
+	int over;
 	/*int poziom;*/
 public:
 	Ball(sf::RenderWindow& window, Lifeheart* lh);
@@ -47,5 +48,8 @@ public:
 	/*bool hppause(sf::RenderWindow& win, bool *wait);*/
 	void hppause(sf::RenderWindow& win, bool* wait, Paddle* p);
 	void setrandpos(sf::RenderWindow& win, Paddle *p);
+	bool gover(bool *wait);
+	int getover();
+	/*bool getgover(bool* wait);*/
 };
 

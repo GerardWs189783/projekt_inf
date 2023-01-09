@@ -148,6 +148,7 @@
     <ClCompile Include="blockTab.cpp" />
     <ClCompile Include="fps.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gameover.cpp" />
     <ClCompile Include="heart.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="lifeheart.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="blockTab.h" />
     <ClInclude Include="fps.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gameover.h" />
     <ClInclude Include="heart.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="lifeheart.h" />

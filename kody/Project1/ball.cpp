@@ -16,6 +16,7 @@ Ball::Ball(sf::RenderWindow& window, Lifeheart *lh)
 	romzmiar_okna.y = window.getSize().y - pSprite.getGlobalBounds().height /*- 70*/;
 	ballbound = pSprite.getGlobalBounds();
 	score = 0;	
+	over = 0;
 	this->ilosc = 1;
 	this->scoreinit();
 	this->velInit();
@@ -202,8 +203,12 @@ bool Ball::utratahp(Heart *hrt, sf::RenderWindow &win, bool* wait, Paddle* p) {
 		yVel = this->yVel;
 		std::cout << "HP: " << hrt->gethp() << std::endl;
 		/*if(heartTab.size() != 0)*/
-		hppause(win,wait,p);
-		/*setrandpos(win);*/
+		//if (gover(wait) == true)
+		//	over = 1;
+		//else
+		//	hppause(win,wait,p);
+		/*hppause(win, wait, p);*/
+		setrandpos(win,p);
 		return true;
 		
 	}
@@ -273,4 +278,18 @@ void Ball::setrandpos(sf::RenderWindow& win, Paddle *p) {
 	std::uniform_int_distribution<> distX(0, 700);
 	int px = distX(gen);*/
 	pSprite.setPosition(sf::Vector2f(p->getpos().x - pSprite.getGlobalBounds().width / 2, p->getpos().y - pSprite.getGlobalBounds().height));
+}
+
+bool Ball::gover(bool *wait) {
+	if (heartTab.size() == 0) {
+			/*wait = true;*/
+			std::cout << "GAMEOVER" << std::endl;
+			/**wait = false;*/
+			return true;
+	}
+	return false;
+}
+
+int Ball::getover() {
+	return this->over;
 }
