@@ -30,3 +30,5 @@ Arkanoid
 30.12 rozwijanie menu i przechodzenie do różnych opcji menu; przenoszenie projektu do klasy symulującej silnik gry
 
 31.12 przenoszenie do silnika samej gry, rozwijanie menu
+
+02.01 poprawa działania menu, możliwości włączenia gry z poziomu menu
