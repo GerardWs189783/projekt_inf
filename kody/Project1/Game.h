@@ -4,6 +4,7 @@
 #include "Play.h"
 #include <iostream>
 #include "Level.h"
+#include "Gameover.h"
 
 class Game
 {
@@ -17,6 +18,9 @@ private:
 	//sf::VideoMode videoMode;
 	//void initVar();
 	//void initWindow();
+	int gamestate;
+	Level* level;
+	Gameover* gameover;
 public:
 	Game();
 	//~Game();
@@ -28,5 +32,7 @@ public:
 	void gameinit();
 	//void update();
 	void render();
+	void returnmenu();
+	void returnplay();
 };
 

@@ -135,14 +135,14 @@ void Menu::drawall(sf::RenderWindow& window)
 	window.display();
 }
 
-//void Menu::runmenu(sf::RenderWindow& window)
-//{
-//	while (window.isOpen()) {
-//		menuevents(window);
-//		drawall(window);
-//		spritesetpos();
-//	}
-//}
+void Menu::runmenu(sf::RenderWindow& window, sf::Event &event)
+{
+	while (window.isOpen()) {
+		menuevents(window,event);
+		drawall(window);
+		spritesetpos();
+	}
+}
 
 void Menu::menuevents(sf::RenderWindow& window,sf::Event &event/* Play* pl*/)
 {

@@ -31,7 +31,7 @@ public:
 	void backdraw(sf::RenderWindow& window);
 	void menuinit(sf::RenderWindow& window);
 	void drawall(sf::RenderWindow& window);
-	/*void runmenu(sf::RenderWindow& window);*/
+	void runmenu(sf::RenderWindow& window, sf::Event &event);
 	void menuevents(sf::RenderWindow& window, sf::Event &event/*,Play* pl*/);
 	/*sf::RenderWindow* getMenuWin();*/
 	

@@ -11,6 +11,7 @@
 #include "lifeheart.h"
 #include "heart.h"
 #include "Menu.h"
+//#include "Gameover.h"
 
 void koniec(BlockTab* block);
 
@@ -23,7 +24,13 @@ int main()
 	game->rungame();
 	delete game;
 	game = nullptr;
+
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
+	//sf::Event event;
+	//Gameover* gover = new Gameover(window);
+	//gover->runmenu(window,event);
+	//delete gover;
+	//gover = nullptr;
 	//window.setFramerateLimit(60);
 	//sf::Event event;
 	//Level* level = new Level(window);

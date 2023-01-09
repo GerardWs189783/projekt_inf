@@ -158,6 +158,7 @@ void Play::runplay(sf::RenderWindow& window,sf::Event &event)
 	/*sf::Event event1;*/
 	while (window.isOpen() && draw == true) {
 		playevents(window, event);
+		
 		drawall(window);
 		spritesetpos();
 		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && getPlayIndex() == Optnumb - 1) {
@@ -207,11 +208,22 @@ void Play::playevents(sf::RenderWindow& window, sf::Event &event)
 				break;
 			}
 			if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && getPlayIndex() == 0) {
-				std::cout << "LEVEL 1" << std::endl;
+				draw = !draw;
+				/*std::cout << "LEVEL 1" << std::endl;
 				level = new Level(window);
-				level->runLevel(window, event);
-				delete level;
-				level = nullptr;
+				level->runLevel(window, event);*/
+				//if (level->gover(&event) == true) {
+				//	delete level;
+				//	level = nullptr;
+
+				//	//Gameover* gover = new Gameover(window);
+				//	//gover->runmenu(window, event);
+				//}
+				/*while (level->gover(&event) == false) {
+					level->runLevel(window, event);
+				}*/
+				/*delete level;
+				level = nullptr;*/
 				break;
 			}
 

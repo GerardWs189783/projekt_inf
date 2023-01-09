@@ -2,7 +2,9 @@
 #include <SFML/Graphics.hpp>
 //#include "Menu.h"
 #include "Level.h"
+#include "Gameover.h"
 #include <iostream>
+//#include "Gameover.h"
 
 #define Optnumb 4
 
@@ -19,6 +21,8 @@ protected:
 	sf::Sprite background;
 	sf::Texture tback;
 	Level* level;
+	Gameover* gameover;
+	bool gamestate;
 	int state;
 	// int state jako parametr do level, ten parametr bedzie zmieniany w zaleznosci od tego czy gre przegrano czy wygrano i tworzyl nowa badz wracal do menu
 	/*sf::RenderWindow* window;*/
