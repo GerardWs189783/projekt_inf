@@ -32,3 +32,5 @@ Arkanoid
 31.12 przenoszenie do silnika samej gry, rozwijanie menu
 
 02.01 poprawa działania menu, możliwości włączenia gry z poziomu menu
+
+09.01 zmiana w game.cpp, przerzucenie do game.cpp klas odpowiedzialnych za dalsze etapy gry, stworzenie klasy gameover, możliwość przegrania i ponownego uruchomienia gry
