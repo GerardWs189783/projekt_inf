@@ -182,3 +182,6 @@ void Menu::menuevents(sf::RenderWindow& window,sf::Event &event/* Play* pl*/)
 //sf::RenderWindow* getMenuWin() {
 //	return window;
 //}
+
+
+

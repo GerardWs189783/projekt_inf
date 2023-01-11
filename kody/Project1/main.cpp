@@ -27,6 +27,10 @@ int main()
 
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "Arkanoid");
 	//sf::Event event;
+	//Win* win = new Win(window);
+	//win->runmenu(window, event);
+	/*Win(window);*/
+	//sf::Event event;
 	//Gameover* gover = new Gameover(window);
 	//gover->runmenu(window,event);
 	//delete gover;

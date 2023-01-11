@@ -6,7 +6,8 @@ Game::Game()
 	gameinit();
 	menu = new Menu(*window);
 	play = nullptr;
-	gameover == nullptr;
+	gameover = nullptr;
+	win = nullptr;
 	gamestate = 0;
 
 }
@@ -24,6 +25,7 @@ void Game::pollEvent()
 	while (window->pollEvent(event)) {
 		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 			window->close();
+			break;
 		}
 		if (event.type == sf::Event::KeyReleased) {
 			if (event.key.code == sf::Keyboard::Up) {
@@ -101,6 +103,7 @@ void Game::rungame()
 				if (gameover->getMenuIndex() == 0) {
 					delete level;
 					level = nullptr;
+					std::cout << "crap" << std::endl;
 				}
 				if (gameover->getMenuIndex() == Extnumb - 1) {
 					delete level;
@@ -109,6 +112,30 @@ void Game::rungame()
 					gamestate = 0;
 					break;
 				}
+			}
+			if (level != nullptr && level->koniec() == true) {
+				win = new Win(*window);
+				win->runmenu(*window, event);
+				if (win->getMenuIndex() == 0) {
+					delete level;
+					level = nullptr;
+				}
+				if (win->getMenuIndex() == Extnumb - 1) {
+					delete level;
+					level = nullptr;
+					returnmenu();
+					gamestate = 0;
+					break;
+				}
+			}
+			else {
+				delete level;
+				level = nullptr;
+				delete play;
+				play = nullptr;
+				returnmenu();
+				gamestate = 0;
+				break;
 			}
 			//returnmenu();
 			//gamestate = 0;

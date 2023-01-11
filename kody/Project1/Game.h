@@ -21,6 +21,7 @@ private:
 	int gamestate;
 	Level* level;
 	Gameover* gameover;
+	Win* win;
 public:
 	Game();
 	//~Game();
