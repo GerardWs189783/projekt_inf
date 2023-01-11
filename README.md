@@ -34,3 +34,5 @@ Arkanoid
 02.01 poprawa działania menu, możliwości włączenia gry z poziomu menu
 
 09.01 zmiana w game.cpp, przerzucenie do game.cpp klas odpowiedzialnych za dalsze etapy gry, stworzenie klasy gameover, możliwość przegrania i ponownego uruchomienia gry
+
+11.01 możliwość wychodzenia z gry w trakcie grania, okno help
