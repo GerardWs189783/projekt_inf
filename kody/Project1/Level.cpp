@@ -1,8 +1,14 @@
 #include "Level.h"
 
-Level::Level(sf::RenderWindow &window)
+//Level::Level(sf::RenderWindow &window,int *n)
+//{
+//	initLevel(window,n);
+//	helpinit(window);
+//}
+
+Level::Level(sf::RenderWindow& window, int n,int l)
 {
-	initLevel(window);
+	initLevel(window, n,l);
 	helpinit(window);
 }
 
@@ -48,16 +54,31 @@ void Level::runLevel(sf::RenderWindow& window, sf::Event &event)
 	}
 }
 
-void Level::initLevel(sf::RenderWindow& window)
+//void Level::initLevel(sf::RenderWindow& window,int *n)
+//{
+//	wait = false;
+//	help = false;
+//	run = false;
+//	lh = new Lifeheart(window);
+//	paddle = new Paddle(window);
+//	ball = new Ball(window, this->lh);
+//	fps = new FPS();	
+//	blockt = new BlockTab(window,n);
+//	helptetx = nullptr;
+//	gm = nullptr;
+//	menu = false;
+//}
+
+void Level::initLevel(sf::RenderWindow& window, int n,int l)
 {
 	wait = false;
 	help = false;
 	run = false;
 	lh = new Lifeheart(window);
 	paddle = new Paddle(window);
-	ball = new Ball(window, this->lh);
-	fps = new FPS();	
-	blockt = new BlockTab(window);
+	ball = new Ball(window, this->lh,l);
+	fps = new FPS();
+	blockt = new BlockTab(window, n);
 	helptetx = nullptr;
 	gm = nullptr;
 	menu = false;

@@ -12,8 +12,10 @@ protected:
 	int* btype;
 	int n;
 public:
-	BlockTab(sf::RenderWindow& window);
-	void init(sf::RenderWindow& window);
+	BlockTab(sf::RenderWindow& window,int *n);
+	void init(sf::RenderWindow& window,int *n);
+	BlockTab(sf::RenderWindow& window, int n);
+	void init(sf::RenderWindow& window, int n);
 	void draw(sf::RenderWindow& window);
 	int getsize();
 	/*void** getarrpointer();*/

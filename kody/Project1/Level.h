@@ -34,10 +34,12 @@ private:
 	/*sf::Sprite backgover;*/
 
 public:
-	Level(sf::RenderWindow &window);
+	/*Level(sf::RenderWindow &window,int* n);*/
+	Level(sf::RenderWindow& window, int n,int l);
 	~Level();
 	void runLevel(sf::RenderWindow &window, sf::Event &event);
-	void initLevel(sf::RenderWindow& window);
+	/*void initLevel(sf::RenderWindow& window,int* n);*/
+	void initLevel(sf::RenderWindow& window, int n, int l);
 	void drawLevel(sf::RenderWindow& window);
 	void eventLevel(sf::RenderWindow& window, sf::Event &event);
 	bool koniec();

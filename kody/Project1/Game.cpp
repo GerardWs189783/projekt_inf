@@ -9,6 +9,8 @@ Game::Game()
 	gameover = nullptr;
 	win = nullptr;
 	gamestate = 0;
+	n = nullptr;
+	x = 1;
 
 }
 
@@ -61,6 +63,20 @@ void Game::pollEvent()
 				gamestate = 1;
 				break;
 			}
+			if (play->getPlayIndex() == 1) {
+				std::cout << "Koniec play tworzenie level2" << std::endl;
+				delete play;
+				play = nullptr;
+				gamestate = 2;
+				break;
+			}
+			if (play->getPlayIndex() == 2) {
+				std::cout << "Koniec play tworzenie level3" << std::endl;
+				delete play;
+				play = nullptr;
+				gamestate = 3;
+				break;
+			}
 			//std::cout << "Koniec play" << std::endl;
 			//delete play;
 			//play = nullptr;
@@ -93,9 +109,14 @@ void Game::rungame()
 			menu = new Menu(*window);
 		}*/
 		
-		while (gamestate == 1) {
+		while (gamestate >0) {
 			std::cout << "LEVEL 1" << std::endl;
-			level = new Level(*window);
+			if(gamestate == 1)
+				level = new Level(*window, 1,3);
+			if (gamestate == 2)
+				level = new Level(*window, 20, 2);
+			if (gamestate == 3)
+				level = new Level(*window, 30, 1);
 			level->runLevel(*window, event);
 			if (level->gover(event, *window) == true) {
 				gameover = new Gameover(*window);
@@ -110,6 +131,7 @@ void Game::rungame()
 					level = nullptr;
 					returnmenu();
 					gamestate = 0;
+					delete gameover, win;
 					break;
 				}
 			}
@@ -125,10 +147,12 @@ void Game::rungame()
 					level = nullptr;
 					returnmenu();
 					gamestate = 0;
+					delete gameover, win;
 					break;
 				}
 			}
-			else {
+			if(level !=nullptr && level->koniec() == false) {
+				std::cout << "aha" << std::endl;
 				delete level;
 				level = nullptr;
 				delete play;

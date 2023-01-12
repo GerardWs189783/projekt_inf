@@ -2,7 +2,7 @@
 
 //std::random_device rd1;
 
-Ball::Ball(sf::RenderWindow& window, Lifeheart *lh)
+Ball::Ball(sf::RenderWindow& window, Lifeheart *lh,int ilosc)
 {
 
 	//romzmiar_okna.x = rx_in - 70;
@@ -17,7 +17,7 @@ Ball::Ball(sf::RenderWindow& window, Lifeheart *lh)
 	ballbound = pSprite.getGlobalBounds();
 	score = 0;	
 	over = 0;
-	this->ilosc = 1;
+	this->ilosc = ilosc;
 	this->scoreinit();
 	this->velInit();
 	this->hpinit(window,lh);

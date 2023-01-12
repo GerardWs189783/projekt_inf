@@ -207,7 +207,7 @@ void Play::playevents(sf::RenderWindow& window, sf::Event &event)
 				// czyli tutaj mo¿na daæ level run i ma warunek na while ze albo gover albo koniec j¹ konczy i wraca do poprzedniego okna
 				break;
 			}
-			if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && getPlayIndex() == 0) {
+			if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && (getPlayIndex() == 0 || getPlayIndex() == 1 || getPlayIndex() == 2)) {
 				draw = !draw;
 				/*std::cout << "LEVEL 1" << std::endl;
 				level = new Level(window);
@@ -226,8 +226,7 @@ void Play::playevents(sf::RenderWindow& window, sf::Event &event)
 				level = nullptr;*/
 				break;
 			}
-
-	}
+		}
 	
 	
 	
