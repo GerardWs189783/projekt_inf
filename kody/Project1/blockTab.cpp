@@ -10,16 +10,56 @@ void BlockTab::init(sf::RenderWindow& window,int n)
 {
 	sf::Vector2u winsize = window.getSize();
 	this->n = n;
-	
+	int typ1 = 1;
+	int typ2 = 2;
+	btype.resize(this->n);
+	bpos.resize(this->n);
 	/*btab = new void*[n];*/
 	/*bTab = new void* [n];*/
-	btype = new int[this->n];
+	/*btype = new int[this->n];*/
 	for (int i = 0; i < this->n; i++) {
 		
 		//btab[n] = i % 2 == 0 ? new Block : new Block2;
 		if (i % 2 == 0) {
 			/*btab[i] = new Block2();*/
 			bTab.push_back(new Block2);
+			/*btype[i] = 2;*/
+			btype[i] = 2;
+		}
+		else {
+			/*btab[i] = new Block();*/
+			bTab.push_back(new Block);
+			/*bTab.at(i) = new Block();*/
+			btype[i] = 1;
+		}
+		bpos[i]=i;
+		//((Block*)btab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));
+		//((Block*)btab[i])->getSpritep()->setPosition(((Block*)btab[i])->getpos());
+		sf::FloatRect bound = ((Block*)bTab[i])->getBounds();
+		/*((Block*)bTab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));*/
+		((Block*)bTab[i])->setpos(sf::Vector2f( (bound.width) / 2 + (bound.width)*(bpos[i] % 10) + 4.5f * ((bpos[i] % 10) + 1), (bound.height) / 2 + 5.0f * ((bpos[i] / 10) + 1) + (bound.height) * ((bpos[i] / 10) + 1)));
+		((Block*)bTab[i])->getSpritep()->setPosition(((Block*)bTab[i])->getpos());
+	}
+}
+
+void BlockTab::init(sf::RenderWindow& window, int n, std::vector <int> bpos)
+{
+	sf::Vector2u winsize = window.getSize();
+	this->n = n;
+	int typ1 = 1;
+	int typ2 = 2;
+	/*btype.resize(this->n);*/
+	bpos.resize(this->n);
+	/*btab = new void*[n];*/
+	/*bTab = new void* [n];*/
+	/*btype = new int[this->n];*/
+	for (int i = 0; i < this->n; i++) {
+
+		//btab[n] = i % 2 == 0 ? new Block : new Block2;
+		if (i % 2 == 0) {
+			/*btab[i] = new Block2();*/
+			bTab.push_back(new Block2);
+			/*btype[i] = 2;*/
 			btype[i] = 2;
 		}
 		else {
@@ -32,9 +72,14 @@ void BlockTab::init(sf::RenderWindow& window,int n)
 		//((Block*)btab[i])->getSpritep()->setPosition(((Block*)btab[i])->getpos());
 		sf::FloatRect bound = ((Block*)bTab[i])->getBounds();
 		/*((Block*)bTab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));*/
-		((Block*)bTab[i])->setpos(sf::Vector2f( (bound.width) / 2 + (bound.width)*(i%10) + 4.5f * ((i%10) + 1), (bound.height) / 2 + 5.0f*((i / 10) + 1) + (bound.height)*((i / 10) + 1)));
+		((Block*)bTab[i])->setpos(sf::Vector2f((bound.width) / 2 + (bound.width) * (bpos[i] % 10) + 4.5f * ((bpos[i] % 10) + 1), (bound.height) / 2 + 5.0f * ((bpos[i] / 10) + 1) + (bound.height) * ((bpos[i] / 10) + 1)));
 		((Block*)bTab[i])->getSpritep()->setPosition(((Block*)bTab[i])->getpos());
 	}
+}
+
+BlockTab::BlockTab(sf::RenderWindow& window)
+{
+	init(window);
 }
 
 BlockTab::BlockTab(sf::RenderWindow& window, int* n)
@@ -46,10 +91,11 @@ void BlockTab::init(sf::RenderWindow& window, int* n)
 {
 	sf::Vector2u winsize = window.getSize();
 	this->n = *n;
-
+	btype.resize(this->n);
+	bpos.resize(this->n);
 	/*btab = new void*[n];*/
 	/*bTab = new void* [n];*/
-	btype = new int[this->n];
+	/*btype = new int[this->n];*/
 	for (int i = 0; i < this->n; i++) {
 
 		//btab[n] = i % 2 == 0 ? new Block : new Block2;
@@ -64,11 +110,46 @@ void BlockTab::init(sf::RenderWindow& window, int* n)
 			/*bTab.at(i) = new Block();*/
 			btype[i] = 1;
 		}
+		bpos[i] = i;
 		//((Block*)btab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));
 		//((Block*)btab[i])->getSpritep()->setPosition(((Block*)btab[i])->getpos());
 		sf::FloatRect bound = ((Block*)bTab[i])->getBounds();
 		/*((Block*)bTab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));*/
-		((Block*)bTab[i])->setpos(sf::Vector2f((bound.width) / 2 + (bound.width) * (i % 10) + 4.5f * ((i % 10) + 1), (bound.height) / 2 + 5.0f * ((i / 10) + 1) + (bound.height) * ((i / 10) + 1)));
+		((Block*)bTab[i])->setpos(sf::Vector2f((bound.width) / 2 + (bound.width) * (bpos[i] % 10) + 4.5f * ((bpos[i] % 10) + 1), (bound.height) / 2 + 5.0f * ((bpos[i] / 10) + 1) + (bound.height) * ((bpos[i] / 10) + 1)));
+		((Block*)bTab[i])->getSpritep()->setPosition(((Block*)bTab[i])->getpos());
+	}
+}
+
+void BlockTab::init(sf::RenderWindow& window)
+{
+	
+	sf::Vector2u winsize = window.getSize();
+	this->n = 10;
+	btype.resize(this->n);
+	bpos.resize(this->n);
+	/*btab = new void*[n];*/
+	/*bTab = new void* [n];*/
+	/*btype = new int[this->n];*/
+	for (int i = 0; i < this->n; i++) {
+
+		//btab[n] = i % 2 == 0 ? new Block : new Block2;
+		if (i % 2 == 0) {
+			/*btab[i] = new Block2();*/
+			bTab.push_back(new Block2);
+			btype[i] = 2;
+		}
+		else {
+			/*btab[i] = new Block();*/
+			bTab.push_back(new Block);
+			/*bTab.at(i) = new Block();*/
+			btype[i] = 1;
+		}
+		bpos[i] = i;
+		//((Block*)btab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));
+		//((Block*)btab[i])->getSpritep()->setPosition(((Block*)btab[i])->getpos());
+		sf::FloatRect bound = ((Block*)bTab[i])->getBounds();
+		/*((Block*)bTab[i])->setpos(sf::Vector2f((winsize.x) / (n + 1) * (i + 1), 100));*/
+		((Block*)bTab[i])->setpos(sf::Vector2f((bound.width) / 2 + (bound.width) * (bpos[i] % 10) + 4.5f * ((bpos[i] % 10) + 1), (bound.height) / 2 + 5.0f * ((bpos[i] / 10) + 1) + (bound.height) * ((bpos[i] / 10) + 1)));
 		((Block*)bTab[i])->getSpritep()->setPosition(((Block*)bTab[i])->getpos());
 	}
 }
@@ -117,6 +198,11 @@ Block* BlockTab::getelementpointerb(int n) {
 	return (Block*)bTab[n];
 }
 
+//int BlockTab::getposind()
+//{
+//	return bpos;
+//}
+
 //void BlockTab::destab(int i)
 //{
 //	delete getelementpointerb(i);
@@ -125,9 +211,15 @@ Block* BlockTab::getelementpointerb(int n) {
 void BlockTab::usunelement(int m) {
 	
 	this->bTab.erase(this->bTab.begin() + m);
+	this->btype.erase(this->btype.begin() + m);
 	std::cout << "Usunieto: " << m << std::endl << bTab.size()<<"\n";
 }
 
 int BlockTab::bTabsize() {
 	return bTab.size();
+}
+
+BlockTab::BlockTab(sf::RenderWindow& window, int n, std::vector<int> bpos)
+{
+	init(window, n, bpos);
 }

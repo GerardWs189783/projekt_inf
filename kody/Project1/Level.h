@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <fstream>
+#include <iostream>
 #include "paddle.h"
 #include "ball.h"
 #include "block.h"
@@ -36,10 +38,12 @@ private:
 public:
 	/*Level(sf::RenderWindow &window,int* n);*/
 	Level(sf::RenderWindow& window, int n,int l);
+	Level(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart,int bn);
 	~Level();
 	void runLevel(sf::RenderWindow &window, sf::Event &event);
 	/*void initLevel(sf::RenderWindow& window,int* n);*/
 	void initLevel(sf::RenderWindow& window, int n, int l);
+	void initLevel(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart,int bn);
 	void drawLevel(sf::RenderWindow& window);
 	void eventLevel(sf::RenderWindow& window, sf::Event &event);
 	bool koniec();
@@ -48,6 +52,39 @@ public:
 	void rungover(sf::Event& event, sf::RenderWindow& window);
 	void helpinit(sf::RenderWindow& window);
 	void helpdelete();
+	Level(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart, int bn, std::vector <int> bp);
+	void initLevel(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart, int bn, std::vector <int> bp);
 	// jeszcze moze jakies funkcje zwracaj¹ce score, pozycje pilki i paddla, ilosc zbitych bloków
 };
 
+class File {
+public:
+	File(float bx, float by, int score, int lnum, int heart, int bnum/* ,BlockTab bt*/) {
+		saveData.bx = bx;
+		saveData.by = by;
+		saveData.score = score;
+		saveData.lnum = lnum;
+		saveData.heart = heart;
+		saveData.bnum = bnum;
+		/*saveData.bt = bt;
+		for (int i = 0; i < bt.bpos.size(); i++) {
+		saveData.bpos.push_back(bt.bpos[i]);
+		}*/
+		 
+	}
+
+	struct Data{
+		float bx;
+		float by;
+		int score;
+		int lnum;
+		int heart;
+		int bnum;
+		//std::vector <int> bpos;
+		//BlockTab bt;
+	}saveData;
+
+	void save(std::string filename);
+	void load(std::string filename);
+
+};

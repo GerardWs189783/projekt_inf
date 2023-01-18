@@ -43,8 +43,13 @@ void Game::pollEvent()
 			window->close();
 			break;
 		}
+		if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && menu->getMenuIndex() == 1) {
+			gamestate = 4;
+			break;
+		}
 		if ((event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) && menu->getMenuIndex() == 0 && play ==nullptr) {
 			//delete menu i nullptr
+			std::cout << "Koniec menu" << std::endl;
 			delete menu;
 			menu = nullptr;
 			play = new Play(*window);
@@ -117,6 +122,12 @@ void Game::rungame()
 				level = new Level(*window, 20, 2);
 			if (gamestate == 3)
 				level = new Level(*window, 30, 1);
+			if (gamestate == 4) {
+				load("Game.dat");
+				delete menu;
+				menu = nullptr;
+				//moze powinno zwracac wskaznik na level
+			}
 			level->runLevel(*window, event);
 			if (level->gover(event, *window) == true) {
 				gameover = new Gameover(*window);
@@ -207,4 +218,20 @@ void Game::returnplay() {
 			break;
 		}*/
 	}
+}
+
+void Game::load(std::string filename) {
+	std::fstream file;
+	file.open(filename, std::ios::in | std::ios::binary);
+	if (file.is_open()) {
+		/*BlockTab* bt = new BlockTab(*window);*/
+		File testfile(200.0f, 200.0f, 2, 1, 0,10/*,&bt*//*std::vector <int> testpos*/);
+		file.read(reinterpret_cast<char*>(&testfile.saveData), sizeof(struct File::Data));
+		File* loadfile = new File(testfile.saveData.bx, testfile.saveData.by, testfile.saveData.score, testfile.saveData.lnum, testfile.saveData.heart,testfile.saveData.bnum/*,testfile.saveData.bt*/);
+		Level* lvf = new Level(*window,loadfile->saveData.bx,loadfile->saveData.by,loadfile->saveData.score,loadfile->saveData.lnum,loadfile->saveData.heart,loadfile->saveData.bnum/*,loadfile->saveData.bpos*/);
+		level = lvf;
+		delete loadfile;
+		file.close();
+	}
+	
 }

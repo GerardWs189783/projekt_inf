@@ -17,6 +17,7 @@ int Heart::dechp() {
 	sf::IntRect txtrect = heart.getTextureRect();
 	txtrect.left += 216;//25
 	heart.setTextureRect(txtrect);
+	std::cout << "--" << std::endl;
 	return this->hp--;
 }
 
@@ -49,3 +50,8 @@ sf::Vector2f Heart::getpos() {
 sf::Sprite* Heart::getsprt() {
 	return &heart;
 }
+
+void Heart::sethp(int h) {
+	this->hp = h;
+}
+

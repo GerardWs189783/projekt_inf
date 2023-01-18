@@ -1,14 +1,20 @@
 #include "Level.h"
 
-//Level::Level(sf::RenderWindow &window,int *n)
+//Level::Level(sf::RenderWindow &window)
 //{
-//	initLevel(window,n);
+//	initLevel(window);
 //	helpinit(window);
 //}
 
 Level::Level(sf::RenderWindow& window, int n,int l)
 {
 	initLevel(window, n,l);
+	helpinit(window);
+}
+
+Level::Level(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart,int bn)
+{
+	initLevel(window, bx, by, score, lnum, heart,bn);
 	helpinit(window);
 }
 
@@ -54,7 +60,7 @@ void Level::runLevel(sf::RenderWindow& window, sf::Event &event)
 	}
 }
 
-//void Level::initLevel(sf::RenderWindow& window,int *n)
+//void Level::initLevel(sf::RenderWindow& window)
 //{
 //	wait = false;
 //	help = false;
@@ -63,7 +69,7 @@ void Level::runLevel(sf::RenderWindow& window, sf::Event &event)
 //	paddle = new Paddle(window);
 //	ball = new Ball(window, this->lh);
 //	fps = new FPS();	
-//	blockt = new BlockTab(window,n);
+//	blockt = new BlockTab(window);
 //	helptetx = nullptr;
 //	gm = nullptr;
 //	menu = false;
@@ -79,6 +85,22 @@ void Level::initLevel(sf::RenderWindow& window, int n,int l)
 	ball = new Ball(window, this->lh,l);
 	fps = new FPS();
 	blockt = new BlockTab(window, n);
+	helptetx = nullptr;
+	gm = nullptr;
+	menu = false;
+}
+
+void Level::initLevel(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart,int bn)
+{
+	
+	help = false;
+	run = false;
+	lh = new Lifeheart(window);
+	paddle = new Paddle(window);
+	//pas bx,by,score,lnum,heart
+	ball = new Ball(window, this->lh,bx,by,score,lnum,heart);
+	fps = new FPS();
+	blockt = new BlockTab(window,bn);
 	helptetx = nullptr;
 	gm = nullptr;
 	menu = false;
@@ -140,6 +162,16 @@ void Level::eventLevel(sf::RenderWindow& window, sf::Event &event)
 			std::cout << "Menu zamkniete" << std::endl;
 			break;
 		}
+		
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter && gm != nullptr && gm->getMenuIndex() == 1) {
+			File* fileinit = new File(ball->getposx(),ball->getposy(), ball->getscore(), ball->hpTabsize(), ball->getpheart(ball->hpTabsize() - 1)->gethp(), blockt->bTabsize()/*,blockt*//*getbposind()*/);
+			fileinit->save("Game.dat");
+			delete fileinit;
+			fileinit = nullptr;
+			std::cout << "Zapis" << std::endl;
+			break;
+		}
+
 
 
 		if (event.type == sf::Event::KeyReleased && gm!=nullptr) {
@@ -267,6 +299,46 @@ void Level::helpdelete()
 	helptetx = nullptr;
 }
 
+Level::Level(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart, int bn, std::vector<int> bp)
+{
+	initLevel(window, bx, by, score, lnum, heart, bn,bp);
+	helpinit(window);
+}
+
+void Level::initLevel(sf::RenderWindow& window, float bx, float by, int score, int lnum, int heart, int bn, std::vector<int> bp)
+{
+	help = false;
+	run = false;
+	lh = new Lifeheart(window);
+	paddle = new Paddle(window);
+	//pas bx,by,score,lnum,heart
+	ball = new Ball(window, this->lh, bx, by, score, lnum, heart);
+	fps = new FPS();
+	blockt = new BlockTab(window, bn,bp);
+	helptetx = nullptr;
+	gm = nullptr;
+	menu = false;
+}
+
 
 // poziomy trudnosci chyba do konstruktorow wejsciowe dane, czyli nowy konstruktor? mozna zmieniac predkosc, ilosc zyc i ilosc klockow
 // zapis stanu gry
+
+void File::save(std::string filename)
+{
+	std::fstream file;
+	file.open(filename,std::ios::out | std::ios::binary );
+	if (file.is_open() && file.good()) {
+		file.write(reinterpret_cast<char*>(&saveData), sizeof(Data));
+		file.close();
+	}
+}
+
+void File::load(std::string filename)
+{
+	std::ifstream file;
+	file.open(filename, std::ios::binary);
+	if (file.is_open()) {
+
+	}
+}

@@ -26,6 +26,29 @@ Ball::Ball(sf::RenderWindow& window, Lifeheart *lh,int ilosc)
 	pSprite.setPosition(position);
 }
 
+Ball::Ball(sf::RenderWindow& window, Lifeheart* lh, float bx, float by, int score, int lnum, int heart) {
+	this->tekstura.loadFromFile("zdj/shrokjj.png");
+	pSprite.setTexture(tekstura);
+	pSprite.setScale(sf::Vector2f(70.f / pSprite.getLocalBounds().width, 70.f / pSprite.getLocalBounds().height));
+	/*pSprite.setOrigin(pSprite.getGlobalBounds().width/2.f, pSprite.getGlobalBounds().height/2.f);*/
+	romzmiar_okna.x = window.getSize().x - pSprite.getGlobalBounds().width /*-70*/;
+	romzmiar_okna.y = window.getSize().y - pSprite.getGlobalBounds().height /*- 70*/;
+	ballbound = pSprite.getGlobalBounds();
+	this->score = score;
+	over = 0;
+	this->ilosc = lnum;
+	this->scoreinit();
+	this->velInit();
+	this->hpinit(window, lh);
+	this->position.x = bx;
+	this->position.y = by;
+	pSprite.setPosition(position);
+	((Heart*)heartTab[heartTab.size() - 1])->sethp(heart);
+	((Heart*)heartTab[heartTab.size() - 1])->getsprt()->setTextureRect(sf::IntRect(14 + 216*(4-heart), 200, 165, 165));
+	std::cout << ((Heart*)heartTab[heartTab.size() - 1])->gethp()<<std::endl;
+}
+
+
 void Ball::przesun(float x_in, float y_in)
 {
 	sf::Vector2f pos;
@@ -292,4 +315,16 @@ bool Ball::gover(bool *wait) {
 
 int Ball::getover() {
 	return this->over;
+}
+
+float Ball::getposy() {
+	return this->position.y;
+}
+
+float Ball::getposx() {
+	return this->position.x;
+}
+
+int Ball::getscore() {
+	return this->score;
 }

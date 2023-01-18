@@ -27,6 +27,7 @@ private:
 	/*int poziom;*/
 public:
 	Ball(sf::RenderWindow& window, Lifeheart* lh,int ilosc);
+	Ball(sf::RenderWindow& window, Lifeheart* lh, float bx, float by, int score, int lnum, int heart);
 	void przesun(float x_in, float y_in);
 	sf::Sprite getBall();
 	void sprawdzKolizjeSciany();
@@ -50,6 +51,9 @@ public:
 	void setrandpos(sf::RenderWindow& win, Paddle *p);
 	bool gover(bool *wait);
 	int getover();
+	float getposy();
+	float getposx();
+	int getscore();
 	/*bool getgover(bool* wait);*/
 };
 

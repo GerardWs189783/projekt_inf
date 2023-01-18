@@ -64,7 +64,7 @@ void Menu::optinit(sf::RenderWindow& window)
 	menu[1].setPosition(sf::Vector2f(window.getSize().x / 2 - 100, window.getSize().y / (Optnumb + 1) * 2));
 	menu[1].setCharacterSize(40);
 	menu[1].setFillColor(sf::Color::White);
-	menu[1].setString("OPTIONS");
+	menu[1].setString("SAVED LEVEL");
 
 	menu[2].setFont(font);
 	menu[2].setPosition(sf::Vector2f(window.getSize().x / 2 - 100, window.getSize().y / (Optnumb + 1) * 3));

@@ -37,5 +37,6 @@ public:
 	void render();
 	void returnmenu();
 	void returnplay();
+	void load(std::string filename);
 };
 

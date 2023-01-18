@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "lifeheart.h"
+#include <iostream>
 
 class Heart
 {
@@ -19,6 +20,7 @@ public:
 	void setpos(sf::Vector2f posin);
 	sf::Vector2f getpos();
 	sf::Sprite* getsprt();
-	
+	void sethp(int h);
+	/*sf::FloatRect*/
 };
 
